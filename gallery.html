@@ -79,11 +79,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .mi-video-badge{position:absolute;top:10px;left:10px;background:rgba(154,111,56,0.9);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);pointer-events:none;display:flex;align-items:center;gap:5px;}
 .mi-badge{position:absolute;top:10px;right:10px;background:rgba(26,23,20,0.72);color:#fff;font-size:10px;font-weight:600;letter-spacing:0.08em;padding:4px 9px;border-radius:20px;backdrop-filter:blur(4px);pointer-events:none;}
 
-/* ── DESCRIPTION PANEL (below each thumb) ── */
+/* ── DESCRIPTION PANEL ── */
 .mi-desc-panel{padding:14px 16px 16px;border-top:1px solid var(--border);background:var(--card);}
-.mi-desc-title{font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--text);margin-bottom:4px;line-height:1.3;}
-.mi-desc-cat{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
-.mi-desc-text{font-size:12.5px;color:var(--muted);line-height:1.7;}
+.mi-desc-cat{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+.mi-desc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:var(--text);margin-bottom:10px;line-height:1.3;}
+
+/* Structured meta rows */
+.mi-meta-table{width:100%;border-collapse:collapse;margin-bottom:10px;}
+.mi-meta-table tr{border-bottom:1px solid var(--border);}
+.mi-meta-table tr:last-child{border-bottom:none;}
+.mi-meta-label{font-size:9.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--light);padding:5px 8px 5px 0;width:38%;vertical-align:top;white-space:nowrap;}
+.mi-meta-value{font-size:12px;font-weight:500;color:var(--sub);padding:5px 0;line-height:1.5;vertical-align:top;}
+.mi-meta-value.desc{font-size:12px;font-weight:400;color:var(--muted);line-height:1.7;}
+
 .mi-desc-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(154,111,56,0.25);padding:6px 13px;border-radius:2px;transition:all 0.2s;}
 .mi-desc-link:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .mi-desc-link svg{flex-shrink:0;}
@@ -217,9 +225,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Application</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Application</div>
+        <div class="mi-desc-cat">Application · Mobile</div>
         <div class="mi-desc-title">WIDEM — Children Development Assessment</div>
-        <div class="mi-desc-text">A mobile application for assessing children's development. Includes 21 screens with a user-friendly interface and a comprehensive assessment system.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Android Studio</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">Java · XML</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">Firebase · SQLite</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A mobile application to assess the developmental milestones of children. Features 21 screens with a clean, child-friendly interface and structured assessment modules for parents and educators.</td></tr>
+        </table>
         <a href="https://kymy07.itch.io/children-development-assessment-application" target="_blank" rel="noopener" class="mi-desc-link">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           View on Itch.io
@@ -241,17 +254,21 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Application</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Application</div>
+        <div class="mi-desc-cat">Application · Mobile</div>
         <div class="mi-desc-title">Aqua Track — Pond Management App</div>
-        <div class="mi-desc-text">Android application for fish pond management using Firebase. Includes fish records, food inventory, sales analytics, and PDF export.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Android Studio</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">Java · XML</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">Firebase Auth · Firebase RTDB</td></tr>
+          <tr><td class="mi-meta-label">Library</td><td class="mi-meta-value">iTextPDF</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">An Android app for fish pond management. Supports fish record tracking, feed inventory, sales analytics, and PDF report export — all synced with Firebase Realtime Database.</td></tr>
+        </table>
         <a href="https://kymy07.itch.io/app-pond-management" target="_blank" rel="noopener" class="mi-desc-link">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           View on Itch.io
         </a>
       </div>
     </div>
-
-    
 
     <!-- ══════════════════════════════════
          WEBSITE
@@ -272,9 +289,15 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Website</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Website</div>
+        <div class="mi-desc-cat">Website · Final Year Project</div>
         <div class="mi-desc-title">FYP Diploma — Website Showcase</div>
-        <div class="mi-desc-text">Video demo of the Diploma Final Year Project website. Featuring a responsive interface, content management system, and full CRUD functionality.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Visual Studio Code</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">HTML · CSS · JavaScript · PHP</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">MySQL</td></tr>
+          <tr><td class="mi-meta-label">Framework</td><td class="mi-meta-value">Bootstrap</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">Demo video of the Diploma Final Year Project website. Built with a responsive interface, full CRUD functionality, and a content management system for easy data handling.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -327,9 +350,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Animation</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Animation · 3D</div>
-        <div class="mi-desc-title">Mini Project — 3D Modelling</div>
-        <div class="mi-desc-text">3D animation project using Blender. Includes modeling, rigging, texturing, lighting, and rendering to produce realistic animation.</div>
+        <div class="mi-desc-cat">Animation · 3D Modelling</div>
+        <div class="mi-desc-title">Mini Project — 3D Modelling &amp; Animation</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Blender</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Modelling · Rigging · UV Unwrapping</td></tr>
+          <tr><td class="mi-meta-label">Render</td><td class="mi-meta-value">Cycles Render</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A 3D animation mini project covering the full pipeline — modelling, rigging, UV unwrapping, texturing, lighting setup, and final render output.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -337,7 +365,7 @@ footer{background:var(--dark);padding:40px 52px 28px;}
     <div class="masonry-item reveal" data-cat="events"
          data-video="AnimationMinion.mp4"
          data-label="Animation Minion">
-      <img src="AnimationMinion.jpg" alt="MiniProject3DModelling">
+      <img src="AnimationMinion.jpg" alt="Animation Minion">
       <div class="mi-video-badge">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         VIDEO
@@ -348,13 +376,15 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Animation</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Animation · 3D</div>
-        <div class="mi-desc-title">Animation Minion</div>
-        <div class="mi-desc-text">The process of creating an animation by combining several images and playing them at high speed. I used Adobe Animate to create this animation.</div>
+        <div class="mi-desc-cat">Animation · 2D Frame-by-Frame</div>
+        <div class="mi-desc-title">Minion Animation</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Adobe Animate</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Frame-by-Frame · Timeline Animation</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A 2D frame-by-frame animation created by sequencing individual drawings at high speed to simulate fluid movement. Features a Minion character with expressive motion sequences.</td></tr>
+        </table>
       </div>
     </div>
-
-
 
     <!-- ══════════════════════════════════
          GAME
@@ -375,9 +405,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Game</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Game</div>
+        <div class="mi-desc-cat">Game · Horror Puzzle</div>
         <div class="mi-desc-title">The Forgotten House</div>
-        <div class="mi-desc-text">A horror/puzzle game developed using Unity. Players explore a mysterious house while solving challenges to open a way out. I used Unity to created this.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Unity</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">C#</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">3D Level Design · Post-Processing</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A first-person horror puzzle game set inside an abandoned house. Players must solve environmental challenges and uncover hidden clues to find a way out before time runs out.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -430,9 +465,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Augmented Reality</div>
-        <div class="mi-desc-title">AR Final Project</div>
-        <div class="mi-desc-text">The final AR project uses Vuforia and Unity. Users can view interactive 3D objects through their mobile device's camera with marker image recognition.</div>
+        <div class="mi-desc-cat">Augmented Reality · Final Project</div>
+        <div class="mi-desc-title">AR Final Project — Interactive 3D Objects</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Unity · Vuforia</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">C#</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Image Target · 3D Modelling</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">An AR application that overlays interactive 3D objects onto the real world through a mobile camera. Uses image marker recognition to trigger and display 3D content in real-time.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -451,9 +491,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Augmented Reality</div>
-        <div class="mi-desc-title">AR Flashcard Baju Melayu Cekak Musang</div>
-        <div class="mi-desc-text">An AR experience that allows users to virtually "try on" the Cekak Musang Melayu using a camera. Preserving cultural heritage through modern technology.</div>
+        <div class="mi-desc-cat">Augmented Reality · Cultural Heritage</div>
+        <div class="mi-desc-title">AR Flashcard — Baju Melayu Cekak Musang</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Unity · Vuforia</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">C#</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">AR Flashcard · 3D Costume Model</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">An AR experience that lets users virtually try on the traditional Baju Melayu Cekak Musang using their camera. A digital effort to preserve and promote Malaysian cultural heritage through modern technology.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -472,60 +517,60 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Augmented Reality</div>
-        <div class="mi-desc-title">AR Flashcard Baju Melayu Teluk Belanga</div>
-        <div class="mi-desc-text">AR version of Baju Melayu Teluk Belanga — another traditional Malay dress. This project is part of the AR series of Malaysian cultural heritage clothing.</div>
+        <div class="mi-desc-cat">Augmented Reality · Cultural Heritage</div>
+        <div class="mi-desc-title">AR Flashcard — Baju Melayu Teluk Belanga</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Unity · Vuforia</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">C#</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">AR Flashcard · 3D Costume Model</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">The second entry in the AR cultural clothing series, featuring Baju Melayu Teluk Belanga. Part of an ongoing project to digitally document and celebrate traditional Malaysian attire through augmented reality.</td></tr>
+        </table>
       </div>
     </div>
 
-    <!-- Augmented Reality — 1 pages slideshow -->
+    <!-- AR Invitation Card — 1 image -->
     <div class="masonry-item reveal" data-cat="augmented reality"
-         data-pages="WIDEM_Page1.jpg"
-         data-label="WIDEM App"
-         data-link="https://kymy07.itch.io/children-development-assessment-application"
-         data-link-label="View on Itch.io">
-      <img src="ARInvitationCard.png" alt="WIDEM Application">
-      <div class="mi-badge">21 pages</div>
+         data-pages="ARInvitationCard.png"
+         data-label="AR Invitation Card">
+      <img src="ARInvitationCard.png" alt="AR Invitation Card">
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
         <div class="mi-label">View Image</div>
         <div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Augmented Reality</div>
-        <div class="mi-desc-title">-</div>
-        <div class="mi-desc-text">-</div>
-        <a href="https://kymy07.itch.io/children-development-assessment-application" target="_blank" rel="noopener" class="mi-desc-link">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          View on Itch.io
-        </a>
+        <div class="mi-desc-cat">Augmented Reality · Print &amp; Digital</div>
+        <div class="mi-desc-title">AR Invitation Card</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Unity · Vuforia · Adobe Illustrator</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">C#</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Image Target · Print Design</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">An augmented reality invitation card that brings printed designs to life. When scanned with a mobile device, the card triggers an interactive AR experience — combining physical print with digital content.</td></tr>
+        </table>
       </div>
     </div>
 
-    <!-- Augmented Reality — 4 pages slideshow -->
+    <!-- AR Mini Project — 1 image -->
     <div class="masonry-item reveal" data-cat="augmented reality"
          data-pages="AR_PH_1.jpg"
-         data-label="WIDEM App"
-         data-link="https://kymy07.itch.io/children-development-assessment-application"
-         data-link-label="View on Itch.io">
-      <img src="ARInvitationCard.png" alt="WIDEM Application">
-      <div class="mi-badge">21 pages</div>
+         data-label="AR Mini Project">
+      <img src="ARInvitationCard.png" alt="AR Mini Project">
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
         <div class="mi-label">View Image</div>
         <div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Augmented Reality</div>
-        <div class="mi-desc-title">-</div>
-        <div class="mi-desc-text">-</div>
-        <a href="https://kymy07.itch.io/children-development-assessment-application" target="_blank" rel="noopener" class="mi-desc-link">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          View on Itch.io
-        </a>
+        <div class="mi-desc-cat">Augmented Reality · Mini Project</div>
+        <div class="mi-desc-title">AR Mini Project</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Unity · Vuforia</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">C#</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Marker Detection · 3D Overlay</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A mini project exploring core AR concepts — marker detection, 3D object overlay, and real-time interaction. Built as part of coursework to understand the fundamentals of augmented reality development.</td></tr>
+        </table>
       </div>
     </div>
-
 
     <!-- ══════════════════════════════════
          VIDEO
@@ -547,8 +592,12 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Video · Promotional</div>
-        <div class="mi-desc-title">Video Promosi — Megabytes Computer</div>
-        <div class="mi-desc-text">Promotional video for computer company Megabytes. Showcasing video editing, color grading, and visual storytelling skills that capture the attention of customers.</div>
+        <div class="mi-desc-title">Promotional Video — Megabytes Computer</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Adobe Premiere Pro · After Effects</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Colour Grading · Motion Graphics</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A promotional video produced for Megabytes Computer. Demonstrates skills in video editing, colour grading, motion graphics, and visual storytelling — crafted to engage and attract potential customers.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -601,20 +650,18 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Others</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Others · Social Media</div>
+        <div class="mi-desc-cat">Others · Social Media Content</div>
         <div class="mi-desc-title">AGRHI — Social Media Video 1</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Adobe Premiere Pro · After Effects</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Video Editing · Motion Graphics</td></tr>
+          <tr><td class="mi-meta-label">Platform</td><td class="mi-meta-value">Social Media</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A short-form social media video produced for AGRHI. Created to increase online presence and engagement across digital platforms with dynamic visuals and concise messaging.</td></tr>
+        </table>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════
-         AGRHI — 5-page slideshow
-         data-page-links format:
-           "URL1::Label1|URL2::Label2|URL3::Label3|URL4::Label4|URL5::Label5"
-         One entry per page, separated by |
-         Each entry: URL::Button Label
-         Leave empty (just |) if a page has no button
-    ══════════════════════════════════ -->
+    <!-- AGRHI — 5-page photo slideshow -->
     <div class="masonry-item reveal d1" data-cat="others"
          data-pages="AGRHIPic1.jpg|AGRHIPic2.jpg|AGRHIPic3.jpg|AGRHIPic4.jpg|AGRHIPic5.jpg"
          data-label="AGRHI — Photo Gallery"
@@ -627,9 +674,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Others</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Others · Social Media</div>
+        <div class="mi-desc-cat">Others · Social Media Content</div>
         <div class="mi-desc-title">AGRHI — Photo Gallery</div>
-        <div class="mi-desc-text">Koleksi gambar sosial media AGRHI. Setiap slaid mempunyai pautan platform yang berbeza.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Adobe Photoshop · Lightroom · Canva</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Photo Editing · Content Strategy</td></tr>
+          <tr><td class="mi-meta-label">Platform</td><td class="mi-meta-value">Instagram · TikTok · LinkedIn · Facebook · YouTube</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">A curated photo collection produced for AGRHI's social media presence. Each image is tailored for a specific platform — swipe through to view and visit the corresponding page.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -648,9 +700,14 @@ footer{background:var(--dark);padding:40px 52px 28px;}
         <div class="mi-cat-tag">Others</div>
       </div>
       <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Others · Social Media</div>
+        <div class="mi-desc-cat">Others · Social Media Content</div>
         <div class="mi-desc-title">AGRHI — Social Media Video 2</div>
-        <div class="mi-desc-text">Promotional video for computer company Megabytes. Showcasing video editing, color grading, and visual storytelling skills that capture the attention of customers.</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Adobe Premiere Pro · After Effects</td></tr>
+          <tr><td class="mi-meta-label">Technique</td><td class="mi-meta-value">Video Editing · Motion Graphics</td></tr>
+          <tr><td class="mi-meta-label">Platform</td><td class="mi-meta-value">Social Media</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">Second social media video for AGRHI, featuring a different style and campaign focus. Produced to diversify content and maintain audience engagement across AGRHI's digital channels.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -705,7 +762,6 @@ footer{background:var(--dark);padding:40px 52px 28px;}
   <div class="lb-info">
     <div class="lb-title" id="lb-title"></div>
     <div class="lb-counter" id="lb-counter"></div>
-    <!-- Per-page links render here -->
     <div id="lb-page-links"></div>
   </div>
 </div>
@@ -752,27 +808,15 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 // ── Lightbox ──
 const items = document.querySelectorAll('.masonry-item');
 let currentItem = 0, currentPage = 0, currentPages = [], isVideo = false;
-let currentPageLinks = []; // per-page links array, one entry per page
+let currentPageLinks = [];
 
 const lbImg   = document.getElementById('lb-img');
 const lbVideo = document.getElementById('lb-video');
 const lbPh    = document.getElementById('lb-ph');
 const lbPageLinksEl = document.getElementById('lb-page-links');
 
-// SVG icon for external link buttons
 const extIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 
-/**
- * Render the per-page link(s) for the current page inside the lightbox.
- * Supports:
- *   - data-link / data-link-label  → single global link (shown on every page)
- *   - data-page-links              → per-page links, format:
- *       "URL1::Label1|URL2::Label2|..."
- *       One entry per page, pipe-separated.
- *       Use "||" or just leave the entry empty for pages with no link.
- *       Multiple links on one page: separate with ";;", e.g.
- *       "URL1a::Label1a;;URL1b::Label1b|URL2::Label2|..."
- */
 function renderPageLinks(item) {
   lbPageLinksEl.innerHTML = '';
 
@@ -781,12 +825,10 @@ function renderPageLinks(item) {
   const globalLabel   = item.dataset.linkLabel || 'View Project';
 
   if (pageLinksAttr) {
-    // Split by page
     const allPageEntries = pageLinksAttr.split('|');
     const entry = allPageEntries[currentPage] || '';
 
     if (entry.trim()) {
-      // Multiple links on same page separated by ";;"
       const linkPairs = entry.split(';;');
       linkPairs.forEach(pair => {
         const [url, label] = pair.split('::');
@@ -801,9 +843,7 @@ function renderPageLinks(item) {
         }
       });
     }
-    // If entry is empty, no button shown for this page
   } else if (globalLink) {
-    // Fallback: single global link for all pages / videos
     const a = document.createElement('a');
     a.className = 'lb-ext-link';
     a.href = globalLink;
@@ -895,7 +935,6 @@ function renderLbImage() {
     pagesNav.style.display = 'none';
   }
 
-  // Update per-page link buttons
   renderPageLinks(item);
 }
 
@@ -922,7 +961,6 @@ function lbNav(dir) {
   openLb(next);
 }
 
-// Clicks on card — but NOT on the desc panel links
 items.forEach((item, i) => {
   item.addEventListener('click', e => {
     if (e.target.closest('.mi-desc-link')) return;
