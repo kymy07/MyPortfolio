@@ -78,20 +78,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 /* badges */
 .mi-video-badge{position:absolute;top:10px;left:10px;background:rgba(154,111,56,0.9);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);pointer-events:none;display:flex;align-items:center;gap:5px;}
 .mi-badge{position:absolute;top:10px;right:10px;background:rgba(26,23,20,0.72);color:#fff;font-size:10px;font-weight:600;letter-spacing:0.08em;padding:4px 9px;border-radius:20px;backdrop-filter:blur(4px);pointer-events:none;}
+/* Combined badge — video + pages */
+.mi-combo-badge{position:absolute;top:10px;left:10px;display:flex;gap:6px;pointer-events:none;}
+.mi-combo-badge span{font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);display:flex;align-items:center;gap:5px;}
+.badge-vid{background:rgba(154,111,56,0.9);color:#fff;}
+.badge-pages{background:rgba(26,23,20,0.72);color:#fff;}
 
 /* ── DESCRIPTION PANEL ── */
 .mi-desc-panel{padding:14px 16px 16px;border-top:1px solid var(--border);background:var(--card);}
 .mi-desc-cat{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
 .mi-desc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:var(--text);margin-bottom:10px;line-height:1.3;}
-
-/* Structured meta rows */
 .mi-meta-table{width:100%;border-collapse:collapse;margin-bottom:10px;}
 .mi-meta-table tr{border-bottom:1px solid var(--border);}
 .mi-meta-table tr:last-child{border-bottom:none;}
 .mi-meta-label{font-size:9.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--light);padding:5px 8px 5px 0;width:38%;vertical-align:top;white-space:nowrap;}
 .mi-meta-value{font-size:12px;font-weight:500;color:var(--sub);padding:5px 0;line-height:1.5;vertical-align:top;}
 .mi-meta-value.desc{font-size:12px;font-weight:400;color:var(--muted);line-height:1.7;}
-
 .mi-desc-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(154,111,56,0.25);padding:6px 13px;border-radius:2px;transition:all 0.2s;}
 .mi-desc-link:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .mi-desc-link svg{flex-shrink:0;}
@@ -108,6 +110,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;border-radius:50%;}
 .lb-nav:hover{background:rgba(255,255,255,0.18);color:#fff;}
 #lb-prev{left:20px;}#lb-next{right:20px;}
+
+/* ── LIGHTBOX TABS (Video / Slideshow) ── */
+.lb-tabs{display:none;gap:6px;margin-bottom:14px;}
+.lb-tabs.show{display:flex;}
+.lb-tab{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 20px;border-radius:2px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.55);cursor:pointer;transition:all 0.2s;}
+.lb-tab:hover{background:rgba(255,255,255,0.14);color:#fff;}
+.lb-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+
 .lb-pages-nav{display:flex;align-items:center;gap:14px;margin-top:14px;}
 .lb-page-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;cursor:pointer;border-radius:2px;transition:all 0.2s;}
 .lb-page-btn:hover:not(:disabled){background:rgba(255,255,255,0.2);color:#fff;}
@@ -118,8 +128,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .lb-info{text-align:center;margin-top:10px;}
 .lb-title{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
 .lb-counter{font-size:10.5px;letter-spacing:0.12em;color:rgba(255,255,255,0.3);margin-top:4px;}
-
-/* Per-page links container */
 #lb-page-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px;}
 .lb-ext-link{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:9px 20px;border-radius:2px;text-decoration:none;transition:background 0.2s;}
 .lb-ext-link:hover{background:var(--gold);}
@@ -211,17 +219,31 @@ footer{background:var(--dark);padding:40px 52px 28px;}
          APPLICATION
     ══════════════════════════════════ -->
 
-    <!-- WIDEM App — 21 pages slideshow -->
+    <!--
+      WIDEM App — Video + 21 pages slideshow
+      data-video       = video file
+      data-pages       = pipe-separated image list untuk slideshow
+      data-has-both    = "true" supaya lightbox tahu nak tunjuk tab
+    -->
     <div class="masonry-item reveal" data-cat="design"
+         data-video="VideoWIDEM.mp4"
          data-pages="WIDEM_Page1.jpg|WIDEM_Page2.jpg|WIDEM_Page3.jpg|WIDEM_Page4.jpg|WIDEM_Page5.jpg|WIDEM_Page6.jpg|WIDEM_Page7.jpg|WIDEM_Page8.jpg|WIDEM_Page9.jpg|WIDEM_Page10.jpg|WIDEM_Page11.jpg|WIDEM_Page12.jpg|WIDEM_Page13.jpg|WIDEM_Page14.jpg|WIDEM_Page15.jpg|WIDEM_Page16.jpg|WIDEM_Page17.jpg|WIDEM_Page18.jpg|WIDEM_Page19.jpg|WIDEM_Page20.jpg|WIDEM_Page21.jpg"
+         data-has-both="true"
          data-label="WIDEM App"
          data-link="https://kymy07.itch.io/children-development-assessment-application"
          data-link-label="View on Itch.io">
       <img src="WIDEM_Page1.jpg" alt="WIDEM Application">
-      <div class="mi-badge">21 pages</div>
+      <!-- Combo badge: VIDEO + 21 pages -->
+      <div class="mi-combo-badge">
+        <span class="badge-vid">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          VIDEO
+        </span>
+        <span class="badge-pages">21 pages</span>
+      </div>
       <div class="mi-overlay">
-        <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View Slideshow</div>
+        <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="mi-label">Video + Slideshow</div>
         <div class="mi-cat-tag">Application</div>
       </div>
       <div class="mi-desc-panel">
@@ -274,7 +296,6 @@ footer{background:var(--dark);padding:40px 52px 28px;}
          WEBSITE
     ══════════════════════════════════ -->
 
-    <!-- WEBSITE FYP DIPLOMA — video -->
     <div class="masonry-item reveal" data-cat="photography"
          data-video="VideoFYPDiploma.mp4"
          data-label="Website FYP Diploma">
@@ -301,53 +322,142 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- Website 02 placeholder -->
-    <div class="masonry-item reveal d1" data-cat="photography">
-      <div class="mi-ph" style="height:210px;">Website 02</div>
+    <!-- interview website AI — 18 pages slideshow -->
+    <div class="masonry-item reveal d1" data-cat="photography"
+         data-pages="IvAI_1.jpg|IvAI_2.jpg|IvAI_3.jpg|IvAI_4.jpg|IvAI_5.jpg|IvAI_6.jpg|IvAI_7.jpg"
+         data-label="AI Interview AI Website"
+         data-link="https://kymy07.itch.io/app-pond-management"
+         data-link-label="View on GitHub">
+      <img src="IvAI_1.jpg" alt="AI Interview Website">
+      <div class="mi-badge">18 pages</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View</div>
+        <div class="mi-label">View Slideshow</div>
         <div class="mi-cat-tag">Website</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Website</div>
-        <div class="mi-desc-title">Website 02</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
+        <div class="mi-desc-title">AI Interview Geospatial AI (UZMA Berhad)</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Visual Studio Code</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">HTML · CSS · JavaScript</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">??????</td></tr>
+          <tr><td class="mi-meta-label">Library</td><td class="mi-meta-value">????</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc"> ???????</td></tr>
+        </table>
+        <a href="https://kymy07.itch.io/app-pond-management" target="_blank" rel="noopener" class="mi-desc-link">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View on GitHub
+        </a>
       </div>
     </div>
 
-    <!-- Website 03 placeholder -->
-    <div class="masonry-item reveal d2" data-cat="photography">
-      <div class="mi-ph" style="height:210px;">Website 03</div>
+     <!-- Website Geospatial AI — 18 pages slideshow -->
+    <div class="masonry-item reveal d1" data-cat="photography"
+         data-pages="APIGI_1.jpg|APIGI_2.jpg|APIGI_3.jpg|APIGI_4.jpg|APIGI_5.jpg|APIGI_6.jpg|APIGI_7.jpg"
+         data-label="Geospatial AI API Website"
+         data-link="https://kymy07.github.io/WEBSITE-UZMA-GeospatialAI/api-docs.html"
+         data-link-label="View on GitHub">
+      <img src="APIGI_1.jpg" alt="Geospatial AI API Website">
+      <div class="mi-badge">7 pages</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View</div>
+        <div class="mi-label">View Slideshow</div>
         <div class="mi-cat-tag">Website</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Website</div>
-        <div class="mi-desc-title">Website 03</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
+        <div class="mi-desc-title">Geospatial AI API Website</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Visual Studio Code</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">HTML · CSS · JavaScript</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">-</td></tr>
+          <tr><td class="mi-meta-label">Library</td><td class="mi-meta-value">????</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc"> ???????</td></tr>
+        </table>
+        <a href="https://kymy07.github.io/WEBSITE-UZMA-GeospatialAI/api-docs.html" target="_blank" rel="noopener" class="mi-desc-link">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View on GitHub
+        </a>
       </div>
     </div>
+
+     <!-- Website Exercise Book (Collaboration with UITM student) — 18 pages slideshow -->
+    <div class="masonry-item reveal d1" data-cat="photography"
+         data-pages="EBW_1.jpg|EBW_2.jpg|EBW_3.jpg|EBW_4.jpg|EBW_5.jpg|EBW_6.jpg|EBW_7.jpg|EBW_8.jpg"
+         data-label="Website Exercise Book"
+         data-link="https://kymy07.itch.io/app-pond-management"
+         data-link-label="View on GitHub">
+      <img src="EBW_1.jpg" alt="Website Exercise Book (Collaboration with UITM student)">
+      <div class="mi-badge">8 pages</div>
+      <div class="mi-overlay">
+        <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="mi-label">View Slideshow</div>
+        <div class="mi-cat-tag">Website</div>
+      </div>
+      <div class="mi-desc-panel">
+        <div class="mi-desc-cat">Website</div>
+        <div class="mi-desc-title">Website Exercise Book (Collaboration with UITM student)</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Visual Studio Code</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">HTML · CSS · JavaScript</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">Firebase Auth · Firebase RTDB</td></tr>
+          <tr><td class="mi-meta-label">Library</td><td class="mi-meta-value">iTextPDF</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">????</td></tr>
+        </table>
+        <a href="https://kymy07.itch.io/app-pond-management" target="_blank" rel="noopener" class="mi-desc-link">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View on Itch.io
+        </a>
+      </div>
+    </div>
+
+     <!-- Website My Portfolio — 18 pages slideshow -->
+    <div class="masonry-item reveal d1" data-cat="photography"
+         data-pages="AQUATRACK_Page1.jpg|AQUATRACK_Page2.jpg|AQUATRACK_Page3.jpg|AQUATRACK_Page4.jpg|AQUATRACK_Page5.jpg|AQUATRACK_Page6.jpg|AQUATRACK_Page7.jpg|AQUATRACK_Page8.jpg|AQUATRACK_Page9.jpg|AQUATRACK_Page10.jpg|AQUATRACK_Page11.jpg|AQUATRACK_Page12.jpg|AQUATRACK_Page13.jpg|AQUATRACK_Page14.jpg|AQUATRACK_Page15.jpg|AQUATRACK_Page16.jpg|AQUATRACK_Page17.jpg|AQUATRACK_Page18.jpg"
+         data-label="My Portfolio Website"
+         data-link="https://kymy07.github.io/MyPortfolio/"
+         data-link-label="View on GitHub">
+      <img src="AQUATRACK_Page1.jpg" alt="My Portfolio Website">
+      <div class="mi-badge">18 pages</div>
+      <div class="mi-overlay">
+        <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="mi-label">View Slideshow</div>
+        <div class="mi-cat-tag">Website</div>
+      </div>
+      <div class="mi-desc-panel">
+        <div class="mi-desc-cat">My Portfolio Website</div>
+        <div class="mi-desc-title">My Portfolio Website</div>
+        <table class="mi-meta-table">
+          <tr><td class="mi-meta-label">Software</td><td class="mi-meta-value">Visual Studio Code</td></tr>
+          <tr><td class="mi-meta-label">Language</td><td class="mi-meta-value">HTML · CSS · JavaScript</td></tr>
+          <tr><td class="mi-meta-label">Database</td><td class="mi-meta-value">Firebase Auth · Firebase RTDB</td></tr>
+          <tr><td class="mi-meta-label">Library</td><td class="mi-meta-value">iTextPDF</td></tr>
+          <tr><td class="mi-meta-label">Description</td><td class="mi-meta-value desc">????</td></tr>
+        </table>
+        <a href="https://kymy07.github.io/MyPortfolio/" target="_blank" rel="noopener" class="mi-desc-link">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View on Itch.io
+        </a>
+      </div>
+    </div>
+
+    
 
     <!-- ══════════════════════════════════
          ANIMATION
     ══════════════════════════════════ -->
 
-    <!-- MINI PROJECT 3D — video -->
     <div class="masonry-item reveal" data-cat="events"
          data-video="MiniProject3D.mp4"
          data-label="Mini Project (3D Modelling)">
       <img src="MiniProject3D.jpg" alt="MiniProject3DModelling">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Animation</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Animation</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Animation · 3D Modelling</div>
@@ -361,19 +471,16 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- Animation Minion — video -->
     <div class="masonry-item reveal" data-cat="events"
          data-video="AnimationMinion.mp4"
          data-label="Animation Minion">
       <img src="AnimationMinion.jpg" alt="Animation Minion">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Animation</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Animation</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Animation · 2D Frame-by-Frame</div>
@@ -390,19 +497,16 @@ footer{background:var(--dark);padding:40px 52px 28px;}
          GAME
     ══════════════════════════════════ -->
 
-    <!-- THE FORGOTTEN HOUSE — video -->
     <div class="masonry-item reveal" data-cat="campus"
          data-video="VideoGameTheForgottenHouse.mp4"
          data-label="The Forgotten House">
       <img src="gambarTheForgottenHouse.jpg" alt="The Forgotten House">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Game</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Game</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Game · Horror Puzzle</div>
@@ -416,53 +520,38 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- Game 02 placeholder -->
     <div class="masonry-item reveal d1" data-cat="campus">
       <div class="mi-ph" style="height:190px;">Game 02</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View</div>
-        <div class="mi-cat-tag">Game</div>
+        <div class="mi-label">View</div><div class="mi-cat-tag">Game</div>
       </div>
-      <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Game</div>
-        <div class="mi-desc-title">Game 02</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
-      </div>
+      <div class="mi-desc-panel"><div class="mi-desc-cat">Game</div><div class="mi-desc-title">Game 02</div></div>
     </div>
 
-    <!-- Game 03 placeholder -->
     <div class="masonry-item reveal d2" data-cat="campus">
       <div class="mi-ph" style="height:220px;">Game 03</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View</div>
-        <div class="mi-cat-tag">Game</div>
+        <div class="mi-label">View</div><div class="mi-cat-tag">Game</div>
       </div>
-      <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Game</div>
-        <div class="mi-desc-title">Game 03</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
-      </div>
+      <div class="mi-desc-panel"><div class="mi-desc-cat">Game</div><div class="mi-desc-title">Game 03</div></div>
     </div>
 
     <!-- ══════════════════════════════════
          AUGMENTED REALITY (AR)
     ══════════════════════════════════ -->
 
-    <!-- AR Final Project — video -->
     <div class="masonry-item reveal" data-cat="augmented reality"
          data-video="AR (Final Project).mp4"
          data-label="AR Final Project">
       <img src="AR (Final Project).jpg" alt="AR Final Project">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Augmented Reality</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Augmented Reality · Final Project</div>
@@ -476,19 +565,16 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- AR Baju Melayu Cekak Musang — video -->
     <div class="masonry-item reveal d1" data-cat="augmented reality"
          data-video="Baju Melayu Cekak Musang Video.mp4"
          data-label="AR Flashcard Baju Melayu Cekak Musang">
       <img src="Baju Melayu Cekak Musang.jpg" alt="AR Baju Melayu Cekak Musang">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Augmented Reality</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Augmented Reality · Cultural Heritage</div>
@@ -502,19 +588,16 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- AR Baju Melayu Teluk Belanga — video -->
     <div class="masonry-item reveal d2" data-cat="augmented reality"
          data-video="Baju Melayu Teluk Belanga Video.mp4"
          data-label="AR Flashcard Melayu Teluk Belanga">
       <img src="Baju Melayu Teluk Belanga.jpg" alt="AR Baju Melayu Teluk Belanga">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Augmented Reality</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Augmented Reality · Cultural Heritage</div>
@@ -528,15 +611,13 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- AR Invitation Card — 1 image -->
     <div class="masonry-item reveal" data-cat="augmented reality"
          data-pages="ARInvitationCard.png"
          data-label="AR Invitation Card">
       <img src="ARInvitationCard.png" alt="AR Invitation Card">
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View Image</div>
-        <div class="mi-cat-tag">Augmented Reality</div>
+        <div class="mi-label">View Image</div><div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Augmented Reality · Print &amp; Digital</div>
@@ -550,15 +631,13 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- AR Mini Project — 1 image -->
     <div class="masonry-item reveal" data-cat="augmented reality"
          data-pages="AR_PH_1.jpg"
          data-label="AR Mini Project">
       <img src="ARInvitationCard.png" alt="AR Mini Project">
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View Image</div>
-        <div class="mi-cat-tag">Augmented Reality</div>
+        <div class="mi-label">View Image</div><div class="mi-cat-tag">Augmented Reality</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Augmented Reality · Mini Project</div>
@@ -576,19 +655,16 @@ footer{background:var(--dark);padding:40px 52px 28px;}
          VIDEO
     ══════════════════════════════════ -->
 
-    <!-- Promotional Video Megabytes Computer -->
     <div class="masonry-item reveal" data-cat="video"
          data-video="Assignment4Vid.mp4"
          data-label="Promotional Video — Megabytes Computer">
       <img src="Assignment4Vid.jpg" alt="Promotional video Megabytes Computer">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Video</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Video</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Video · Promotional</div>
@@ -601,53 +677,38 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- Short Film placeholder -->
     <div class="masonry-item reveal d1" data-cat="video">
       <div class="mi-ph" style="height:210px;">Short Film</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Video</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Video</div>
       </div>
-      <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Video · Short Film</div>
-        <div class="mi-desc-title">Short Film — Untitled</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
-      </div>
+      <div class="mi-desc-panel"><div class="mi-desc-cat">Video · Short Film</div><div class="mi-desc-title">Short Film — Untitled</div></div>
     </div>
 
-    <!-- Motion Graphics placeholder -->
     <div class="masonry-item reveal d2" data-cat="video">
       <div class="mi-ph" style="height:190px;">Motion Graphics</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Video</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Video</div>
       </div>
-      <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Video · Motion Graphics</div>
-        <div class="mi-desc-title">Motion Graphics Reel</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
-      </div>
+      <div class="mi-desc-panel"><div class="mi-desc-cat">Video · Motion Graphics</div><div class="mi-desc-title">Motion Graphics Reel</div></div>
     </div>
 
     <!-- ══════════════════════════════════
          OTHERS
     ══════════════════════════════════ -->
 
-    <!-- AGRHI Social Media Video 1 -->
     <div class="masonry-item reveal" data-cat="others"
          data-video="AGRHI1.mp4"
          data-label="AGRHI — Social Media Video 1">
       <img src="AGRHI1.jpg" alt="AGRHI Social Media Video 1">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Others</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Others</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Others · Social Media Content</div>
@@ -661,17 +722,15 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- AGRHI — 5-page photo slideshow -->
     <div class="masonry-item reveal d1" data-cat="others"
-         data-pages="AGRHIPic1.jpg|AGRHIPic2.jpg|AGRHIPic3.jpg|AGRHIPic4.jpg|AGRHIPic5.jpg"
+         data-pages="AGRHIPic1.jpg|AGRHIPic2.jpg|AGRHIPic3.jpg|AGRHIPic4.jpg"
          data-label="AGRHI — Photo Gallery"
-         data-page-links="https://www.instagram.com/agrhi/::View on Instagram|https://www.tiktok.com/@agrhi::View on Tiktok|https://www.linkedin.com/@agrhi::View on LinkedIn|https://facebook.com/agrhi::View on Facebook|https://www.youtube.com/@agrhi::View on YouTube">
+         data-page-links="https://www.instagram.com/agrhi/::View on Instagram|https://www.tiktok.com/@agrhi::View on Tiktok|https://www.linkedin.com/@agrhi::View on LinkedIn|https://facebook.com/agrhi::View on Facebook">
       <img src="AGRHIPic1.jpg" alt="AGRHI Photo Gallery">
       <div class="mi-badge">5 pages</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View Slideshow</div>
-        <div class="mi-cat-tag">Others</div>
+        <div class="mi-label">View Slideshow</div><div class="mi-cat-tag">Others</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Others · Social Media Content</div>
@@ -685,19 +744,16 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- AGRHI Social Media Video 2 -->
     <div class="masonry-item reveal" data-cat="others"
          data-video="AGRHI2.mp4"
          data-label="AGRHI — Social Media Video 2">
       <img src="AGRHI2.jpg" alt="AGRHI Social Media Video 2">
       <div class="mi-video-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        VIDEO
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>VIDEO
       </div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-        <div class="mi-label">Play Video</div>
-        <div class="mi-cat-tag">Others</div>
+        <div class="mi-label">Play Video</div><div class="mi-cat-tag">Others</div>
       </div>
       <div class="mi-desc-panel">
         <div class="mi-desc-cat">Others · Social Media Content</div>
@@ -711,54 +767,53 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- Others 03 placeholder -->
     <div class="masonry-item reveal d2" data-cat="others">
       <div class="mi-ph" style="height:210px;">Others 03</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View</div>
-        <div class="mi-cat-tag">Others</div>
+        <div class="mi-label">View</div><div class="mi-cat-tag">Others</div>
       </div>
-      <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Others</div>
-        <div class="mi-desc-title">Others 03</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
-      </div>
+      <div class="mi-desc-panel"><div class="mi-desc-cat">Others</div><div class="mi-desc-title">Others 03</div></div>
     </div>
 
-    <!-- Others 04 placeholder -->
     <div class="masonry-item reveal d2" data-cat="others">
       <div class="mi-ph" style="height:210px;">Others 04</div>
       <div class="mi-overlay">
         <div class="mi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <div class="mi-label">View</div>
-        <div class="mi-cat-tag">Others</div>
+        <div class="mi-label">View</div><div class="mi-cat-tag">Others</div>
       </div>
-      <div class="mi-desc-panel">
-        <div class="mi-desc-cat">Others</div>
-        <div class="mi-desc-title">Others 04</div>
-        <div class="mi-desc-text">Tambah penerangan projek anda di sini.</div>
-      </div>
+      <div class="mi-desc-panel"><div class="mi-desc-cat">Others</div><div class="mi-desc-title">Others 04</div></div>
     </div>
 
   </div><!-- /masonry -->
 </div><!-- /gallery-main -->
 
-<!-- LIGHTBOX -->
+<!-- ══════════════════════════════════
+     LIGHTBOX
+══════════════════════════════════ -->
 <div id="lightbox">
   <button id="lb-close" onclick="closeLb()">Close &times;</button>
   <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">&#8592;</button>
   <button class="lb-nav" id="lb-next" onclick="lbNav(1)">&#8594;</button>
+
+  <!-- TAB SWITCHER — only shown for items with both video + slideshow -->
+  <div class="lb-tabs" id="lb-tabs">
+    <button class="lb-tab active" id="tab-video" onclick="switchTab('video')">▶ Video</button>
+    <button class="lb-tab" id="tab-slides" onclick="switchTab('slides')">⊞ Slideshow (21 pages)</button>
+  </div>
+
   <div class="lb-inner">
     <img id="lb-img" src="" alt="" style="display:none;">
     <video id="lb-video" controls playsinline style="display:none;">Your browser does not support the video tag.</video>
     <div class="lb-img-ph" id="lb-ph">No image — add your photos first</div>
   </div>
+
   <div class="lb-pages-nav" id="lb-pages-nav" style="display:none;">
     <button class="lb-page-btn" id="lb-page-prev" onclick="pageNav(-1)">&#8592; Prev</button>
     <div class="lb-page-dots" id="lb-dots"></div>
     <button class="lb-page-btn" id="lb-page-next" onclick="pageNav(1)">Next &#8594;</button>
   </div>
+
   <div class="lb-info">
     <div class="lb-title" id="lb-title"></div>
     <div class="lb-counter" id="lb-counter"></div>
@@ -807,19 +862,30 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 // ── Lightbox ──
 const items = document.querySelectorAll('.masonry-item');
-let currentItem = 0, currentPage = 0, currentPages = [], isVideo = false;
-let currentPageLinks = [];
+let currentItem  = 0;
+let currentPage  = 0;
+let currentPages = [];
+let currentMode  = 'video'; // 'video' | 'slides'
+let hasBoth      = false;
 
-const lbImg   = document.getElementById('lb-img');
-const lbVideo = document.getElementById('lb-video');
-const lbPh    = document.getElementById('lb-ph');
+const lbImg         = document.getElementById('lb-img');
+const lbVideo       = document.getElementById('lb-video');
+const lbPh          = document.getElementById('lb-ph');
+const lbTabsEl      = document.getElementById('lb-tabs');
+const tabVideoBtn   = document.getElementById('tab-video');
+const tabSlidesBtn  = document.getElementById('tab-slides');
 const lbPageLinksEl = document.getElementById('lb-page-links');
 
 const extIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 
+function stopVideo() {
+  if (!lbVideo.paused) lbVideo.pause();
+  lbVideo.removeAttribute('src');
+  lbVideo.load();
+}
+
 function renderPageLinks(item) {
   lbPageLinksEl.innerHTML = '';
-
   const pageLinksAttr = item.dataset.pageLinks || '';
   const globalLink    = item.dataset.link || '';
   const globalLabel   = item.dataset.linkLabel || 'View Project';
@@ -827,17 +893,13 @@ function renderPageLinks(item) {
   if (pageLinksAttr) {
     const allPageEntries = pageLinksAttr.split('|');
     const entry = allPageEntries[currentPage] || '';
-
     if (entry.trim()) {
-      const linkPairs = entry.split(';;');
-      linkPairs.forEach(pair => {
+      entry.split(';;').forEach(pair => {
         const [url, label] = pair.split('::');
         if (url && url.trim()) {
           const a = document.createElement('a');
           a.className = 'lb-ext-link';
-          a.href = url.trim();
-          a.target = '_blank';
-          a.rel = 'noopener';
+          a.href = url.trim(); a.target = '_blank'; a.rel = 'noopener';
           a.innerHTML = extIcon + (label ? label.trim() : 'View Link');
           lbPageLinksEl.appendChild(a);
         }
@@ -846,32 +908,82 @@ function renderPageLinks(item) {
   } else if (globalLink) {
     const a = document.createElement('a');
     a.className = 'lb-ext-link';
-    a.href = globalLink;
-    a.target = '_blank';
-    a.rel = 'noopener';
+    a.href = globalLink; a.target = '_blank'; a.rel = 'noopener';
     a.innerHTML = extIcon + globalLabel;
     lbPageLinksEl.appendChild(a);
   }
 }
 
-function stopVideo() {
-  if (!lbVideo.paused) lbVideo.pause();
-  lbVideo.removeAttribute('src');
-  lbVideo.load();
+// Switch between Video tab and Slideshow tab (only for WIDEM-type items)
+function switchTab(mode) {
+  currentMode = mode;
+  const item = items[currentItem];
+
+  if (mode === 'video') {
+    tabVideoBtn.classList.add('active');
+    tabSlidesBtn.classList.remove('active');
+
+    // Hide slideshow nav
+    document.getElementById('lb-pages-nav').style.display = 'none';
+    document.getElementById('lb-counter').textContent = '';
+    document.getElementById('lb-prev').style.display = 'none';
+    document.getElementById('lb-next').style.display = 'none';
+
+    // Show video
+    lbImg.style.display   = 'none';
+    lbPh.style.display    = 'none';
+    lbVideo.style.display = 'block';
+    lbVideo.src = item.dataset.video;
+    lbVideo.load();
+    lbVideo.play().catch(() => {});
+    renderPageLinks(item);
+
+  } else {
+    tabVideoBtn.classList.remove('active');
+    tabSlidesBtn.classList.add('active');
+
+    // Stop video
+    stopVideo();
+    lbVideo.style.display = 'none';
+    document.getElementById('lb-prev').style.display = 'flex';
+    document.getElementById('lb-next').style.display = 'flex';
+
+    // Show slideshow from beginning
+    currentPage  = 0;
+    currentPages = (item.dataset.pages || '').split('|');
+    renderLbImage();
+    renderPageLinks(item);
+  }
 }
 
 function openLb(itemIdx) {
   currentItem = itemIdx;
   currentPage = 0;
   const item      = items[itemIdx];
-  const pagesAttr = item.dataset.pages;
-  const videoSrc  = item.dataset.video || '';
-  const label     = item.dataset.label || item.querySelector('.mi-label')?.textContent || '';
+  const pagesAttr = item.dataset.pages  || '';
+  const videoSrc  = item.dataset.video  || '';
+  const label     = item.dataset.label  || '';
+  hasBoth         = item.dataset.hasBoth === 'true';
 
   document.getElementById('lb-title').textContent = label;
 
-  if (videoSrc) {
-    isVideo = true;
+  // Update slideshow tab button text with page count
+  if (hasBoth) {
+    const pageCount = pagesAttr ? pagesAttr.split('|').length : 0;
+    tabSlidesBtn.textContent = `⊞ Slideshow (${pageCount} pages)`;
+    lbTabsEl.classList.add('show');
+  } else {
+    lbTabsEl.classList.remove('show');
+  }
+
+  if (hasBoth) {
+    // Always start on Video tab
+    currentMode  = 'video';
+    currentPages = pagesAttr.split('|');
+    switchTab('video');
+
+  } else if (videoSrc) {
+    // Normal video-only item
     currentPages = [];
     lbImg.style.display   = 'none';
     lbPh.style.display    = 'none';
@@ -884,18 +996,14 @@ function openLb(itemIdx) {
     document.getElementById('lb-prev').style.display = 'none';
     document.getElementById('lb-next').style.display = 'none';
     renderPageLinks(item);
+
   } else {
-    isVideo = false;
+    // Image / slideshow only
     stopVideo();
     lbVideo.style.display = 'none';
     document.getElementById('lb-prev').style.display = 'flex';
     document.getElementById('lb-next').style.display = 'flex';
-    if (pagesAttr) {
-      currentPages = pagesAttr.split('|');
-    } else {
-      const img = item.querySelector('img');
-      currentPages = img ? [img.src] : [];
-    }
+    currentPages = pagesAttr ? pagesAttr.split('|') : (item.querySelector('img') ? [item.querySelector('img').src] : []);
     renderLbImage();
   }
 
@@ -949,6 +1057,7 @@ function closeLb() {
   document.body.style.overflow = '';
   document.getElementById('lb-prev').style.display = 'flex';
   document.getElementById('lb-next').style.display = 'flex';
+  lbTabsEl.classList.remove('show');
 }
 
 function lbNav(dir) {
@@ -973,8 +1082,8 @@ document.getElementById('lightbox').addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLb();
-  else if (!isVideo) {
+  if (e.key === 'Escape') { closeLb(); return; }
+  if (currentMode === 'slides') {
     if (e.key === 'ArrowLeft') {
       if (currentPages.length > 1 && currentPage > 0) pageNav(-1);
       else lbNav(-1);
@@ -983,8 +1092,19 @@ document.addEventListener('keydown', e => {
       if (currentPages.length > 1 && currentPage < currentPages.length - 1) pageNav(1);
       else lbNav(1);
     }
+  } else if (!hasBoth) {
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
   }
 });
+
+// ── URL filter param ──
+const urlParams = new URLSearchParams(window.location.search);
+const filterParam = urlParams.get('filter');
+if (filterParam) {
+  const btn = [...document.querySelectorAll('.filter-btn')].find(b => b.dataset.filter === filterParam);
+  if (btn) btn.click();
+}
 </script>
 </body>
 </html>

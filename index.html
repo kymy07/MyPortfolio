@@ -6,6 +6,8 @@
 <title>Adlishah Hakimi — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root{--bg:#FAF7F2;--bg2:#F2EDE4;--bg3:#EDE5D8;--card:#FFFFFF;--text:#1A1714;--sub:#4A4239;--muted:#7A6E64;--light:#B8A998;--accent:#9A6F38;--gold:#C49A4E;--border:#DDD4C8;--dark:#1A1714;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -127,8 +129,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .contact-card .section-title{margin-bottom:12px;}
 .contact-card p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:28px;}
 .contact-links{display:flex;flex-direction:column;gap:14px;}
-
-/* ── CONTACT LINK — now a proper <a> tag ── */
 .cl{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--sub);transition:color 0.2s;cursor:pointer;text-decoration:none;}
 .cl:hover{color:var(--accent);}
 .cl-icon{width:40px;height:40px;border:1.5px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--bg2);transition:border-color 0.2s,background 0.2s;}
@@ -137,6 +137,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .cl-val{font-size:13.5px;color:var(--sub);transition:color 0.2s;}
 .cl:hover .cl-val{color:var(--accent);}
 
+/* FORM */
 .fg{margin-bottom:12px;}
 .fg label{display:block;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
 .fc{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:3px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color 0.2s;}
@@ -144,8 +145,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .fc::placeholder{color:var(--light);}
 textarea.fc{resize:vertical;min-height:100px;}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
-.fsub{width:100%;margin-top:6px;background:var(--accent);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:14px;border-radius:3px;cursor:pointer;transition:background 0.22s;}
-.fsub:hover{background:var(--dark);}
+
+/* Submit button states */
+.fsub{width:100%;margin-top:6px;background:var(--accent);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:14px;border-radius:3px;cursor:pointer;transition:background 0.22s,opacity 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.fsub:hover:not(:disabled){background:var(--dark);}
+.fsub:disabled{opacity:0.7;cursor:not-allowed;}
+.fsub.sending{background:var(--muted);}
+.fsub.success{background:#4CAF50;}
+.fsub.error{background:#e53935;}
+
+/* Toast notification */
+.toast{position:fixed;bottom:28px;right:28px;z-index:9999;padding:14px 22px;border-radius:6px;font-size:13px;font-weight:500;letter-spacing:0.04em;box-shadow:0 8px 28px rgba(0,0,0,0.18);transform:translateY(20px);opacity:0;transition:transform 0.35s ease,opacity 0.35s ease;pointer-events:none;max-width:320px;line-height:1.5;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.toast-success{background:#1a2e1a;color:#7fcc7f;border:1px solid rgba(127,204,127,0.3);}
+.toast.toast-error{background:#2e1a1a;color:#cc7f7f;border:1px solid rgba(204,127,127,0.3);}
+
+/* Spinner */
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0;}
 
 /* FOOTER */
 footer{background:var(--dark);padding:56px 52px 32px;}
@@ -188,10 +205,15 @@ footer{background:var(--dark);padding:56px 52px 32px;}
   .ft-top{grid-template-columns:1fr;} footer{padding:36px 18px 22px;}
   #about,#work,#gp,#contact{padding-top:64px;padding-bottom:64px;padding-left:18px;padding-right:18px;}
   #skills{padding:64px 18px;}
+  .toast{left:18px;right:18px;bottom:18px;}
 }
 </style>
 </head>
 <body>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
 <nav>
   <a href="index.html" class="nav-brand">Adlishah <em>Hakimi</em></a>
   <ul class="nav-links">
@@ -224,13 +246,12 @@ footer{background:var(--dark);padding:56px 52px 32px;}
       <a href="#contact" class="btn btn-outline">Get In Touch</a>
     </div>
     <div class="hero-stats">
-      <div><span class="stat-num">23</span><span class="stat-label">Years Old</span></div>
+      <div><span class="stat-num">24</span><span class="stat-label">Years Old</span></div>
       <div><span class="stat-num">6+</span><span class="stat-label">Projects</span></div>
       <div><span class="stat-num">4</span><span class="stat-label">Skill Areas</span></div>
     </div>
   </div>
   <div class="hero-right">
-    <!-- Replace: <img src="your-photo.jpg" class="hero-img" alt="Adlishah Hakimi"> -->
     <div class="hero-ph">
       <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span>Your Photo Here</span>
@@ -265,8 +286,8 @@ footer{background:var(--dark);padding:56px 52px 32px;}
   <div class="sk-grid">
     <div class="sk-card reveal"><span class="sk-num">01</span><span class="sk-icon">💻</span><div class="sk-name">Mobile Application Developer</div><div class="sk-desc">Develops functional and user-friendly mobile applications with a focus on performance, usability, and clean architecture.</div><div class="sk-tools"><span class="sk-tool">Android</span><span class="sk-tool">Java</span><span class="sk-tool">XML</span></div></div>
     <div class="sk-card reveal d1"><span class="sk-num">02</span><span class="sk-icon">🎨</span><div class="sk-name">Website Developer</div><div class="sk-desc">Builds responsive and modern websites with clean layouts, ensuring smooth user experience across all devices.</div><div class="sk-tools"><span class="sk-tool">HTML/CSS</span><span class="sk-tool">Javascript</span><span class="sk-tool">PHP</span></div></div>
-    <div class="sk-card reveal d2"><span class="sk-num">03</span><span class="sk-icon">🎬</span><div class="sk-name">Animation</div><div class="sk-desc"> Creates engaging visual stories through motion graphics, video editing, and creative animation techniques.</div><div class="sk-tools"><span class="sk-tool">Maya</span><span class="sk-tool">After Effects</span><span class="sk-tool">Adobe Animate</span></div></div>
-    <div class="sk-card reveal"><span class="sk-num">04</span><span class="sk-icon">⚙️</span><div class="sk-name">Programming</div><div class="sk-desc"> Writes clean, efficient, and maintainable code to build scalable applications across different platforms.</div><div class="sk-tools"><span class="sk-tool">Java</span><span class="sk-tool">C++</span></div></div>
+    <div class="sk-card reveal d2"><span class="sk-num">03</span><span class="sk-icon">🎬</span><div class="sk-name">Animation</div><div class="sk-desc">Creates engaging visual stories through motion graphics, video editing, and creative animation techniques.</div><div class="sk-tools"><span class="sk-tool">Maya</span><span class="sk-tool">After Effects</span><span class="sk-tool">Adobe Animate</span></div></div>
+    <div class="sk-card reveal"><span class="sk-num">04</span><span class="sk-icon">⚙️</span><div class="sk-name">Programming</div><div class="sk-desc">Writes clean, efficient, and maintainable code to build scalable applications across different platforms.</div><div class="sk-tools"><span class="sk-tool">Java</span><span class="sk-tool">C++</span></div></div>
     <div class="sk-card reveal d1"><span class="sk-num">05</span><span class="sk-icon">✨</span><div class="sk-name">UI/UX Design</div><div class="sk-desc">Designs intuitive and visually appealing interfaces by focusing on user behavior, usability, and interaction flow.</div><div class="sk-tools"><span class="sk-tool">Figma</span><span class="sk-tool">Adobe XD</span></div></div>
     <div class="sk-card reveal d2"><span class="sk-num">06</span><span class="sk-icon">📸</span><div class="sk-name">Multimedia</div><div class="sk-desc">Produces creative content including photography, audio, and digital media to enhance overall project storytelling.</div><div class="sk-tools"><span class="sk-tool">Canva</span><span class="sk-tool">Adobe Photoshop</span><span class="sk-tool">Adobe After Effect</span></div></div>
   </div>
@@ -344,54 +365,50 @@ footer{background:var(--dark);padding:56px 52px 32px;}
         <h2 class="section-title">Let's Work <em>Together</em></h2>
         <p>I'm open for work, freelance projects, or any collaboration. Don't hesitate to reach out!</p>
         <div class="contact-links">
-
-          <!-- WhatsApp — opens WhatsApp chat -->
           <a class="cl" href="https://wa.me/60189437671" target="_blank" rel="noopener">
             <div class="cl-icon">📱</div>
-            <div>
-              <span class="cl-lbl">WhatsApp</span>
-              <span class="cl-val">+60 18-943 7671</span>
-            </div>
+            <div><span class="cl-lbl">WhatsApp</span><span class="cl-val">+60 18-943 7671</span></div>
           </a>
-
-          <!-- Email — opens mail client -->
           <a class="cl" href="mailto:adlishah0821@gmail.com">
             <div class="cl-icon">✉️</div>
-            <div>
-              <span class="cl-lbl">Email</span>
-              <span class="cl-val">adlishah0821@gmail.com</span>
-            </div>
+            <div><span class="cl-lbl">Email</span><span class="cl-val">adlishah0821@gmail.com</span></div>
           </a>
-
-          <!-- LinkedIn -->
           <a class="cl" href="https://linkedin.com/in/adlishah" target="_blank" rel="noopener">
             <div class="cl-icon">🔗</div>
-            <div>
-              <span class="cl-lbl">LinkedIn</span>
-              <span class="cl-val">linkedin.com/in/adlishah</span>
-            </div>
+            <div><span class="cl-lbl">LinkedIn</span><span class="cl-val">linkedin.com/in/adlishah</span></div>
           </a>
-
-          <!-- GitHub -->
           <a class="cl" href="https://github.com/kymy07" target="_blank" rel="noopener">
             <div class="cl-icon">💻</div>
-            <div>
-              <span class="cl-lbl">GitHub</span>
-              <span class="cl-val">https://github.com/kymy07</span>
-            </div>
+            <div><span class="cl-lbl">GitHub</span><span class="cl-val">github.com/kymy07</span></div>
           </a>
-
         </div>
       </div>
-      <form action="#" method="post">
-        <div class="frow">
-          <div class="fg"><label>Name</label><input type="text" class="fc" placeholder="Your full name" required></div>
-          <div class="fg"><label>Email</label><input type="email" class="fc" placeholder="your@email.com" required></div>
+
+      <!-- ✅ FUNCTIONAL CONTACT FORM using EmailJS -->
+      <div>
+        <div class="frow" style="margin-bottom:12px;">
+          <div class="fg" style="margin-bottom:0;">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" class="fc" placeholder="Your full name" required>
+          </div>
+          <div class="fg" style="margin-bottom:0;">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" class="fc" placeholder="your@email.com" required>
+          </div>
         </div>
-        <div class="fg"><label>Subject</label><input type="text" class="fc" placeholder="What's this about?"></div>
-        <div class="fg"><label>Message</label><textarea class="fc" placeholder="Tell me about your project..."></textarea></div>
-        <button type="submit" class="fsub">Send Message &rarr;</button>
-      </form>
+        <div class="fg">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" class="fc" placeholder="What's this about?">
+        </div>
+        <div class="fg">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" class="fc" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button type="button" class="fsub" id="send-btn" onclick="sendEmail()">
+          Send Message &rarr;
+        </button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -413,7 +430,7 @@ footer{background:var(--dark);padding:56px 52px 32px;}
     </ul></div>
   </div>
   <div class="ft-bot">
-    <p class="ft-copy">&copy; 2024 Adlishah Hakimi bin Sharilfuddin. All rights reserved.</p>
+    <p class="ft-copy">&copy; 2026 Adlishah Hakimi bin Sharilfuddin. All rights reserved.</p>
     <div class="ft-soc">
       <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/in/adlishah-hakimi-56325223a?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">LinkedIn</a>
@@ -423,11 +440,107 @@ footer{background:var(--dark);padding:56px 52px 32px;}
 </footer>
 
 <script>
+
+const EMAILJS_PUBLIC_KEY  = 'cEbXvtGBRcejv2J-N';
+const EMAILJS_SERVICE_ID  = 'service_p1nsa7k';
+const EMAILJS_TEMPLATE_ID = 'template_zrmmd8o';  
+
+// Init EmailJS
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// Toast helper
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast toast-' + type;
+  // force reflow so transition triggers
+  void t.offsetWidth;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+// Main send function
+function sendEmail() {
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const subject = document.getElementById('cf-subject').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+  const btn     = document.getElementById('send-btn');
+
+  // Basic validation
+  if (!name) { showToast('⚠️ Please insert your name.', 'error'); document.getElementById('cf-name').focus(); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('⚠️ Please insert your valid email.', 'error'); document.getElementById('cf-email').focus(); return; }
+  if (!message) { showToast('⚠️ Please write your message.', 'error'); document.getElementById('cf-message').focus(); return; }
+
+  // Check keys configured
+  if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+    showToast('⚙️ Setup EmailJS keys dalam kod HTML dulu. Semak komen dalam <script>.', 'error');
+    return;
+  }
+
+  // Sending state
+  btn.disabled = true;
+  btn.classList.add('sending');
+  btn.innerHTML = '<div class="spinner"></div> Sending...';
+
+  const templateParams = {
+    from_name:  name,
+    from_email: email,
+    subject:    subject || '(No subject)',
+    message:    message,
+    reply_to:   email
+  };
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    .then(() => {
+      btn.classList.remove('sending');
+      btn.classList.add('success');
+      btn.innerHTML = '✓ Message Sent!';
+      showToast('✅ Mesej berjaya dihantar! Adlishah akan reply secepat mungkin.', 'success');
+
+      // Clear fields
+      document.getElementById('cf-name').value    = '';
+      document.getElementById('cf-email').value   = '';
+      document.getElementById('cf-subject').value = '';
+      document.getElementById('cf-message').value = '';
+
+      // Reset button after 4s
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.classList.remove('success');
+        btn.innerHTML = 'Send Message &rarr;';
+      }, 4000);
+    })
+    .catch((err) => {
+      console.error('EmailJS error:', err);
+      btn.disabled = false;
+      btn.classList.remove('sending');
+      btn.classList.add('error');
+      btn.innerHTML = '✕ Failed — Try Again';
+      showToast('❌ Gagal hantar mesej. Sila cuba lagi atau hubungi terus via WhatsApp.', 'error');
+
+      setTimeout(() => {
+        btn.classList.remove('error');
+        btn.innerHTML = 'Send Message &rarr;';
+      }, 4000);
+    });
+}
+
+// Allow Enter key to submit (Ctrl+Enter in textarea)
+document.getElementById('cf-message').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.ctrlKey) sendEmail();
+});
+
+/* ── Nav ── */
 const obs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); obs.unobserve(e.target); } });
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); obs.unobserve(e.target); }
+  });
 }, { threshold: 0.09 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
 document.getElementById('ham').addEventListener('click', () => document.getElementById('mob').classList.toggle('open'));
+
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.boxShadow = window.scrollY > 20 ? '0 2px 18px rgba(26,23,20,0.06)' : 'none';
 });
