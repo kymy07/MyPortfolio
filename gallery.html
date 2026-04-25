@@ -117,15 +117,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 52px;d
 .lb-ext-link{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:9px 20px;border-radius:2px;text-decoration:none;transition:background 0.2s;}
 .lb-ext-link:hover{background:var(--gold);}
 
-footer{background:var(--dark);padding:40px 52px 28px;}
-.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+/* ── FOOTER — same as index.html ── */
+footer{background:var(--dark);padding:56px 52px 32px;}
+.ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.ft-name{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:8px;}
+.ft-name em{font-style:italic;color:var(--gold);}
+.ft-desc{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.75;max-width:230px;}
+.ft-col h5{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:16px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col a{font-size:13px;color:rgba(255,255,255,0.45);transition:color 0.2s;}
+.ft-col a:hover{color:var(--gold);}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;}
 .ft-copy{font-size:11.5px;color:rgba(255,255,255,0.25);}
 .ft-soc{display:flex;gap:20px;}
 .ft-soc a{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);transition:color 0.2s;}
 .ft-soc a:hover{color:var(--gold);}
-.ft-nav{display:flex;gap:24px;}
-.ft-nav a{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:color 0.2s;}
-.ft-nav a:hover{color:var(--gold);}
 
 @media(max-width:960px){
   nav{padding:0 24px;}.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}
@@ -133,8 +139,13 @@ footer{background:var(--dark);padding:40px 52px 28px;}
   .filter-inner{padding:0 24px;}
   .gallery-main{padding:36px 24px 60px;}
   .masonry{columns:2;}
-  footer{padding:32px 24px 22px;}
+  footer{padding:44px 24px 28px;}
+  .ft-top{grid-template-columns:1fr 1fr;gap:28px;}
   #lb-prev{left:8px;}#lb-next{right:8px;}
+}
+@media(max-width:640px){
+  .ft-top{grid-template-columns:1fr;}
+  footer{padding:36px 18px 22px;}
 }
 @media(max-width:480px){.masonry{columns:1;}}
 </style>
@@ -305,7 +316,6 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- GEOSPATIAL AI API WEBSITE — description updated -->
     <div class="masonry-item reveal d1" data-cat="photography"
          data-pages="APIGI_1.jpg|APIGI_2.jpg|APIGI_3.jpg|APIGI_4.jpg|APIGI_5.jpg|APIGI_6.jpg|APIGI_7.jpg"
          data-label="Geospatial AI API Website"
@@ -334,7 +344,6 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- WEBSITE EXERCISE BOOK — description updated -->
     <div class="masonry-item reveal d1" data-cat="photography"
          data-pages="EBW_1.jpg|EBW_2.jpg|EBW_3.jpg|EBW_4.jpg|EBW_5.jpg|EBW_6.jpg|EBW_7.jpg|EBW_8.jpg"
          data-label="Website Exercise Book"
@@ -363,7 +372,6 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- MY PORTFOLIO WEBSITE — images changed to P1–P6, description updated, irrelevant fields removed -->
     <div class="masonry-item reveal d1" data-cat="photography"
          data-pages="P1.jpg|P2.jpg|P3.jpg|P4.jpg|P5.JPG|P6.jpg"
          data-label="My Portfolio Website"
@@ -671,7 +679,6 @@ footer{background:var(--dark);padding:40px 52px 28px;}
       </div>
     </div>
 
-    <!-- PEKAN CARE DASHBOARD -->
     <div class="masonry-item reveal d1" data-cat="others"
          data-pages="Pekan1.jpg|Pekan2.jpg|Pekan3.jpg|Pekan4.jpg|Pekan5.jpg"
          data-label="Pekan Care — Food Insecurity Dashboard"
@@ -728,17 +735,28 @@ footer{background:var(--dark);padding:40px 52px 28px;}
   </div>
 </div>
 
+<!-- FOOTER — same as index.html -->
 <footer>
-  <div class="ft-bot">
-    <p class="ft-copy">&copy; 2026 Adlishah Hakimi bin Sharilfuddin</p>
-    <div class="ft-nav">
-      <a href="index.html">Home</a>
-      <a href="index.html#contact">Contact</a>
+  <div class="ft-top">
+    <div>
+      <div class="ft-name">Adlishah <em>Hakimi</em></div>
+      <p class="ft-desc">Fresh graduate from UMPSA, passionate about web development, mobile apps, design, and multimedia production.</p>
     </div>
+    <div class="ft-col"><h5>Navigate</h5><ul><li><a href="index.html#about">About</a></li><li><a href="index.html#skills">Skills</a></li><li><a href="index.html#work">Work</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+    <div class="ft-col"><h5>Pages</h5><ul><li><a href="gallery.html">Gallery</a></li><li><a href="gallery.html?filter=video">Videos</a></li></ul></div>
+    <div class="ft-col"><h5>Social</h5><ul>
+      <li><a href="https://www.instagram.com/idk_kxy07?igsh=MXVyb3FjdDVmN3A5Zw%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.linkedin.com/in/adlishah-hakimi-56325223a/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/kymy07" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.facebook.com/adlishah.hakimi?mibextid=wwXIfr&mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+    </ul></div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">&copy; 2026 Adlishah Hakimi bin Sharilfuddin. All rights reserved.</p>
     <div class="ft-soc">
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
+      <a href="https://www.instagram.com/idk_kxy07?igsh=MXVyb3FjdDVmN3A5Zw%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/adlishah-hakimi-56325223a/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/kymy07" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </footer>
