@@ -38,14 +38,31 @@ img{max-width:100%;display:block;}
 
 /* ─── NAV ─── */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;display:flex;align-items:center;justify-content:space-between;background:var(--white);box-shadow:0 2px 14px rgba(45,55,72,0.06);}
-.logo{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:700;color:var(--dark);}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--dark);}
 .logo-mark{width:36px;height:36px;border-radius:9px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;}
 .logo-mark span{color:#f2cc8f;}
-.nav-links{display:flex;align-items:center;gap:24px;list-style:none;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;}
 .nav-links a{font-size:14px;font-weight:500;color:var(--dark);position:relative;padding:6px 0;transition:color .22s;white-space:nowrap;}
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5px;background:var(--blue);border-radius:2px;transform:scaleX(0);transition:transform .25s;}
 .nav-links a:hover,.nav-links a.active{color:var(--blue);}
 .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+/* page links (load another page) — visually separate from the scroll links */
+.nav-sep{width:1px;height:22px;background:var(--border);margin:0 3px;flex-shrink:0;}
+.nav-page{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
+  color:var(--dark);border:1.6px solid var(--border);padding:7px 15px;border-radius:50px;
+  transition:all .25s;white-space:nowrap;}
+.nav-page::after{display:none!important;}
+.nav-page svg{width:11px;height:11px;opacity:.55;}
+.nav-links a.nav-page:hover{color:var(--blue);border-color:var(--blue);background:rgba(224,122,95,.08);}
+.nav-page:hover svg{opacity:.9;}
+.nav-links a.nav-page.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(224,122,95,.28);}
+.nav-page.active svg{opacity:.95;}
+.mm-sep{margin-top:10px;padding-top:14px;border-top:1px solid var(--border);font-size:10.5px;
+  font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--light);padding-bottom:2px;}
+.mobile-menu a.mm-page{display:flex;align-items:center;justify-content:space-between;
+  color:var(--blue);font-weight:600;}
+.mobile-menu a.mm-page span{font-size:13px;opacity:.7;}
+
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
 .hamburger span{width:25px;height:2.5px;background:var(--dark);border-radius:2px;display:block;}
 .mobile-menu{display:none;position:fixed;top:74px;left:0;right:0;z-index:499;background:var(--white);box-shadow:0 10px 26px rgba(45,55,72,0.1);padding:14px 9% 22px;flex-direction:column;}
@@ -169,7 +186,7 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 .top-btn:hover{background:var(--dark);transform:translateY(-4px);}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1250px){ .nav-links{gap:17px;} .nav-links a{font-size:13px;} }
+@media(max-width:1360px){ .nav-links{gap:14px;} .nav-links a{font-size:13px;} .nav-page{padding:6px 12px;font-size:12.5px;} .logo{font-size:18px;} }
 @media(max-width:1100px){
   nav,.page-hero,.gallery-main,footer,.filter-inner,.mobile-menu{padding-left:5%;padding-right:5%;}
   .nav-links{gap:20px;}
@@ -200,7 +217,7 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav>
-  <a href="index.html" class="logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah</a>
+  <a href="index.html" class="logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah Hakimi</a>
   <ul class="nav-links">
     <li><a href="index.html#home">Home</a></li>
     <li><a href="index.html#about">About</a></li>
@@ -208,9 +225,10 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
     <li><a href="index.html#education">Education</a></li>
     <li><a href="index.html#work">Work</a></li>
     <li><a href="index.html#experience">Experience</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="gallery.html" class="active">Gallery</a></li>
     <li><a href="index.html#contact">Contact</a></li>
+    <li class="nav-sep" aria-hidden="true"></li>
+    <li><a href="events.html" class="nav-page">Events<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+    <li><a href="gallery.html" class="nav-page active" aria-current="page">Gallery<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
   </ul>
   <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
@@ -221,9 +239,10 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
   <a href="index.html#education">Education</a>
   <a href="index.html#work">Work</a>
   <a href="index.html#experience">Experience</a>
-  <a href="events.html">Events</a>
-  <a href="gallery.html">Gallery</a>
   <a href="index.html#contact">Contact</a>
+  <div class="mm-sep">Other pages</div>
+  <a href="events.html" class="mm-page">Events <span>&#8599;</span></a>
+  <a href="gallery.html" class="mm-page">Gallery <span>&#8599;</span></a>
 </div>
 
 <!-- ═══════════ PAGE HERO ═══════════ -->
@@ -858,7 +877,7 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <footer>
   <div class="ft-grid">
     <div>
-      <div class="ft-logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah</div>
+      <div class="ft-logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah Hakimi</div>
       <p class="ft-desc">Fresh graduate from UMPSA, passionate about web development, mobile apps, design, and multimedia production.</p>
       <div class="ft-soc">
         <a href="https://www.linkedin.com/in/adlishah-hakimi-56325223a/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8h4.52v14H.24V8zM8.34 8h4.33v1.92h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.02 5.42 6.94V22h-4.52v-6.6c0-1.57-.03-3.6-2.19-3.6-2.2 0-2.53 1.72-2.53 3.49V22H8.34V8z"/></svg></a>

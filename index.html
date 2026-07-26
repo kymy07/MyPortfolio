@@ -48,14 +48,31 @@ img{max-width:100%;display:block;}
 
 /* ─── NAV ─── */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;display:flex;align-items:center;justify-content:space-between;background:var(--white);box-shadow:0 2px 14px rgba(45,55,72,0.06);transition:box-shadow .25s;}
-.logo{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:700;color:var(--dark);}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--dark);}
 .logo-mark{width:36px;height:36px;border-radius:9px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;}
 .logo-mark span{color:#f2cc8f;}
-.nav-links{display:flex;align-items:center;gap:24px;list-style:none;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;}
 .nav-links a{font-size:14px;font-weight:500;color:var(--dark);position:relative;padding:6px 0;transition:color .22s;white-space:nowrap;}
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5px;background:var(--blue);border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform .25s;}
 .nav-links a:hover,.nav-links a.active{color:var(--blue);}
 .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+/* page links (load another page) — visually separate from the scroll links */
+.nav-sep{width:1px;height:22px;background:var(--border);margin:0 3px;flex-shrink:0;}
+.nav-page{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
+  color:var(--dark);border:1.6px solid var(--border);padding:7px 15px;border-radius:50px;
+  transition:all .25s;white-space:nowrap;}
+.nav-page::after{display:none!important;}
+.nav-page svg{width:11px;height:11px;opacity:.55;}
+.nav-links a.nav-page:hover{color:var(--blue);border-color:var(--blue);background:rgba(224,122,95,.08);}
+.nav-page:hover svg{opacity:.9;}
+.nav-links a.nav-page.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(224,122,95,.28);}
+.nav-page.active svg{opacity:.95;}
+.mm-sep{margin-top:10px;padding-top:14px;border-top:1px solid var(--border);font-size:10.5px;
+  font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--light);padding-bottom:2px;}
+.mobile-menu a.mm-page{display:flex;align-items:center;justify-content:space-between;
+  color:var(--blue);font-weight:600;}
+.mobile-menu a.mm-page span{font-size:13px;opacity:.7;}
+
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
 .hamburger span{width:25px;height:2.5px;background:var(--dark);border-radius:2px;display:block;transition:.25s;}
 .mobile-menu{display:none;position:fixed;top:74px;left:0;right:0;z-index:499;background:var(--white);box-shadow:0 10px 26px rgba(45,55,72,0.1);padding:14px 9% 22px;flex-direction:column;}
@@ -248,7 +265,7 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 .top-btn:hover{background:var(--dark);transform:translateY(-4px);}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1250px){ .nav-links{gap:17px;} .nav-links a{font-size:13px;} }
+@media(max-width:1360px){ .nav-links{gap:14px;} .nav-links a{font-size:13px;} .nav-page{padding:6px 12px;font-size:12.5px;} .logo{font-size:18px;} }
 @media(max-width:1100px){
   nav,section,footer{padding-left:5%;padding-right:5%;}
   .mobile-menu{padding-left:5%;padding-right:5%;}
@@ -296,7 +313,7 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="nav">
-  <a href="index.html" class="logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah</a>
+  <a href="index.html" class="logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah Hakimi</a>
   <ul class="nav-links">
     <li><a href="#home" class="active">Home</a></li>
     <li><a href="#about">About</a></li>
@@ -304,9 +321,10 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
     <li><a href="#education">Education</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li class="nav-sep" aria-hidden="true"></li>
+    <li><a href="events.html" class="nav-page">Events<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+    <li><a href="gallery.html" class="nav-page">Gallery<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
   </ul>
   <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
@@ -317,9 +335,10 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
   <a href="#education">Education</a>
   <a href="#work">Work</a>
   <a href="#experience">Experience</a>
-  <a href="events.html">Events</a>
-  <a href="gallery.html">Gallery</a>
   <a href="#contact">Contact</a>
+  <div class="mm-sep">Other pages</div>
+  <a href="events.html" class="mm-page">Events <span>&#8599;</span></a>
+  <a href="gallery.html" class="mm-page">Gallery <span>&#8599;</span></a>
 </div>
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -470,35 +489,26 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
           <g stroke="#69724A" stroke-width="3" opacity=".85" stroke-linecap="round">
             <path d="M202,326 C206,302 214,287 223,278"/>
             <path d="M214,333 C217,308 224,293 233,283"/>
-            <path d="M226,337 C228,313 232,297 238,287"/>
+            <path d="M228,337 C230,315 233,301 238,292"/>
             <path d="M298,326 C294,302 286,287 277,278"/>
             <path d="M286,333 C283,308 276,293 267,283"/>
-            <path d="M274,337 C272,313 268,297 262,287"/>
+            <path d="M272,337 C270,315 267,301 262,292"/>
           </g>
 
-          <!-- ══════ POLO COLLAR (tucked inside the jacket) ══════ -->
-          <path d="M250,264 L217,279 L231,314 L255,281 Z" fill="#35456C"/>
-          <path d="M250,264 L283,279 L269,314 L245,281 Z" fill="#35456C"/>
-          <path d="M250,264 L217,279 L231,314" stroke="#F4F3EF" stroke-width="3" fill="none" opacity=".92" stroke-linejoin="round"/>
-          <path d="M250,264 L283,279 L269,314" stroke="#F4F3EF" stroke-width="3" fill="none" opacity=".92" stroke-linejoin="round"/>
-
-
-          <!-- ══════ LANYARD + STAFF ID BADGE ══════ -->
-          <path d="M235,300 C238,332 243,364 247,388" stroke="#262A33" stroke-width="8.5" fill="none" stroke-linecap="round"/>
-          <path d="M265,300 C262,332 257,364 253,388" stroke="#262A33" stroke-width="8.5" fill="none" stroke-linecap="round"/>
-          <path d="M236,306 C239,336 244,366 247,388" stroke="#3A404D" stroke-width="2.4" fill="none" opacity=".8"/>
-          <path d="M264,306 C261,336 256,366 253,388" stroke="#3A404D" stroke-width="2.4" fill="none" opacity=".8"/>
-          <rect x="244" y="384" width="12" height="11" rx="2.5" fill="#AEB3BA"/>
-          <rect x="231" y="393" width="38" height="50" rx="4.5" fill="#F1F1EE" stroke="#C6C6C1" stroke-width="1.6"/>
-          <rect x="236" y="398" width="15" height="18" rx="2" fill="#B9BEC6"/>
-          <circle cx="243.5" cy="404" r="3.4" fill="#8E949E"/>
-          <path d="M238,412 C240,408 247,408 249,412 Z" fill="#8E949E"/>
-          <rect x="254" y="399" width="11" height="2.6" rx="1.3" fill="#C2C6CC"/>
-          <rect x="254" y="405" width="11" height="2.6" rx="1.3" fill="#C2C6CC"/>
-          <rect x="254" y="411" width="8" height="2.6" rx="1.3" fill="#C2C6CC"/>
-          <rect x="236" y="421" width="29" height="2.8" rx="1.4" fill="#C2C6CC"/>
-          <rect x="236" y="427" width="22" height="2.8" rx="1.4" fill="#C2C6CC"/>
-          <rect x="231" y="435" width="38" height="8" rx="0" fill="#F26522" opacity=".9"/>
+        <!-- ══════ POLO COLLAR — stand across the throat, a flap each side ══════ -->
+        <!-- stand: the band that wraps the neck, visible between the two flaps -->
+        <path d="M227,278 C237,268 263,268 273,278 L273,294 L227,294 Z" fill="#2A3757"/>
+        <!-- flaps fold down from the sides of the neck, not from a centre peak -->
+        <path d="M230,274 L217,289 L234,316 L246,291 Z" fill="#35456C"/>
+        <path d="M270,274 L283,289 L266,316 L254,291 Z" fill="#35456C"/>
+        <!-- crease where each flap folds back over the stand -->
+        <path d="M230,274 L246,291" stroke="#26314F" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M270,274 L254,291" stroke="#26314F" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <!-- piping on the outer fold only, so the two flaps stay separate shapes -->
+        <path d="M230,274 L217,289 L234,316" stroke="#F4F3EF" stroke-width="2.4" fill="none"
+              stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>
+        <path d="M270,274 L283,289 L266,316" stroke="#F4F3EF" stroke-width="2.4" fill="none"
+              stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>
 
           <!-- ══════ FACE ══════ -->
           <path d="M188,140 C188,98 209,82 250,82 C291,82 312,98 312,140
@@ -1012,7 +1022,7 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <footer>
   <div class="ft-grid">
     <div>
-      <div class="ft-logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah</div>
+      <div class="ft-logo"><span class="logo-mark">&lt;<span>/</span>&gt;</span>Adlishah Hakimi</div>
       <p class="ft-desc">Fresh graduate from UMPSA, passionate about web development, mobile apps, design, and multimedia production.</p>
       <div class="ft-soc">
         <a href="https://www.linkedin.com/in/adlishah-hakimi-56325223a/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8h4.52v14H.24V8zM8.34 8h4.33v1.92h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.02 5.42 6.94V22h-4.52v-6.6c0-1.57-.03-3.6-2.19-3.6-2.2 0-2.53 1.72-2.53 3.49V22H8.34V8z"/></svg></a>
