@@ -11,7 +11,7 @@ Computer Science (Graphics & Multimedia Technology) graduate, UMPSA.
 
 ### 🔗 **[kymy07.github.io/MyPortfolio](https://kymy07.github.io/MyPortfolio/)**
 
-<img src="preview.jpg" alt="Portfolio home page" width="100%">
+<img src="assets/img/profile/preview.jpg" alt="Portfolio home page" width="100%">
 
 </div>
 
@@ -70,15 +70,21 @@ No npm install, no bundler, no dependencies to audit.
 
 ```
 MyPortfolio/
-├── index.html          # home — includes the inline SVG avatar
-├── showcase.html       # project showcase + lightbox
-├── events.html         # events & activities
-├── gallery.html        # redirect → showcase.html
-├── favicon.ico         # cartoon avatar, multi-size
-├── favicon.png         # 512px master
+├── index.html               # home — includes the inline SVG avatar
+├── showcase.html            # project showcase + lightbox
+├── events.html              # events & activities
+├── gallery.html             # redirect → showcase.html
+├── favicon.ico              # cartoon avatar, multi-size
+├── favicon.png              # 512px master
 ├── apple-touch-icon.png
-├── preview.jpg         # README banner
-└── <project media>     # screenshots, slideshows and .mp4 walkthroughs
+├── icon-192.png
+└── assets/
+    ├── img/
+    │   ├── profile/         # portrait + README banner
+    │   ├── projects/        # university & personal project screenshots
+    │   ├── uzma/            # Uzma Digital Earth platform captures
+    │   └── events/          # event photography
+    └── video/               # project walkthroughs (.mp4)
 ```
 
 ---
