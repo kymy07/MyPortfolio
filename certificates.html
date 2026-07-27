@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Events &amp; Activities — Adlishah Hakimi</title>
-<meta name="description" content="Events, exhibitions and activities Adlishah Hakimi has joined and contributed to.">
+<title>Certificates — Adlishah Hakimi</title>
+<meta name="description" content="Licenses, certifications and awards earned by Adlishah Hakimi.">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="favicon.png" sizes="512x512">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -111,6 +111,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 .ev-empty code{background:var(--bg);padding:2px 7px;border-radius:5px;font-size:12.5px;color:var(--blue);}
 
 
+/* ─── CERTIFICATES ─── */
+.certs-section{padding:0 9% 96px;}
+.sec-head{text-align:center;margin-bottom:48px;}
+.sec-title{font-size:clamp(1.8rem,3.6vw,2.4rem);font-weight:700;color:var(--dark);line-height:1.25;}
+.sec-title span{color:var(--blue);}
+.sec-sub{font-size:15px;color:var(--light);max-width:560px;margin:16px auto 0;line-height:1.8;}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;max-width:1280px;margin:0 auto;}
+.cert-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:all .3s;display:flex;flex-direction:column;}
+.cert-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-h);}
+.cert-thumb{position:relative;aspect-ratio:4/3;background:#f4efe4;display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-in;overflow:hidden;}
+.cert-thumb img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+  box-shadow:0 4px 16px rgba(45,55,72,.14);transition:transform .5s ease;}
+.cert-card:hover .cert-thumb img{transform:scale(1.04);}
+.cert-body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;}
+.cert-title{font-size:1.05rem;font-weight:600;color:var(--dark);line-height:1.42;margin-bottom:8px;}
+.cert-meta{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:10px;}
+.cert-meta span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--light);}
+.cert-meta svg{width:13px;height:13px;flex-shrink:0;stroke:var(--blue);}
+.cert-desc{font-size:13.5px;color:var(--body);line-height:1.8;flex:1;}
+.cert-empty{max-width:640px;margin:0 auto;text-align:center;background:var(--white);
+  border:2px dashed var(--border);border-radius:18px;padding:44px 32px;}
+.cert-empty svg{width:40px;height:40px;stroke:var(--sage);margin-bottom:14px;}
+.cert-empty h3{font-size:1.05rem;font-weight:600;color:var(--dark);margin-bottom:8px;}
+.cert-empty p{font-size:14px;color:var(--light);line-height:1.8;}
+
 /* ─── LIGHTBOX ─── */
 #lightbox{display:none;position:fixed;inset:0;background:rgba(35,41,54,.97);z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
 #lightbox.show{display:flex;}
@@ -180,8 +205,8 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
     <li><a href="index.html#experience">Experience</a></li>
     <li><a href="index.html#contact">Contact</a></li>
     <li class="nav-sep" aria-hidden="true"></li>
-    <li><a href="events.html" class="nav-page active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10.5h18"/></svg>Events</a></li>
-    <li><a href="certificates.html" class="nav-page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-2.5L17 22l-1.5-7.5"/></svg>Certificates</a></li>
+    <li><a href="events.html" class="nav-page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10.5h18"/></svg>Events</a></li>
+    <li><a href="certificates.html" class="nav-page active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-2.5L17 22l-1.5-7.5"/></svg>Certificates</a></li>
     <li><a href="showcase.html" class="nav-page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8.8" cy="8.8" r="1.6"/><path d="m21 15.5-4.5-4.5L5.5 21"/></svg>Showcase</a></li>
   </ul>
   <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -204,83 +229,49 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <div class="page-hero">
   <canvas id="particles"></canvas>
   <div class="ph-inner">
-    <h1 class="ph-title">Events &amp; <span>Activities</span></h1>
+    <h1 class="ph-title">Certificates &amp; <span>Recognition</span></h1>
     <div class="sec-bar"></div>
-    <p class="ph-sub">Exhibitions, competitions and activities I have joined, contributed to, and represented — beyond the code.</p>
+    <p class="ph-sub">Licenses, certifications and awards earned along the way.</p>
     <a href="index.html" class="btn btn-out">&larr; Back to Home</a>
   </div>
 </div>
 
-<!-- ═══════════ EVENTS ═══════════ -->
-<div class="events-main">
-  <div class="ev-grid" id="evGrid">
-
-    <!-- ══ EVENT · CSR Ikan Bandaraya ══ -->
-    <div class="ev-card reveal">
-      <div class="ev-thumb"
-           data-imgs="assets/img/events/CSR_IKAN_1.jpg|assets/img/events/CSR_IKAN_2.jpg|assets/img/events/CSR_IKAN_3.jpg|assets/img/events/CSR_IKAN_4.jpg|assets/img/events/CSR_IKAN_5.jpg"
-           data-caption="CSR Ikan Bandaraya river clean-up — UZMA Berhad, Celebrating Women Empowerment">
-        <img src="assets/img/events/CSR_IKAN_1.jpg" alt="UZMA team at the CSR Ikan Bandaraya river clean-up">
-        <span class="ev-tag">CSR</span>
-        <span class="ev-count"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8.8" cy="8.8" r="1.6"/><path d="m21 15.5-4.5-4.5L5.5 21"/></svg>5 photos</span>
-        <div class="ev-zoom"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div>
-      </div>
-      <div class="ev-body">
-        <div class="ev-title">CSR — Ikan Bandaraya River Clean-Up</div>
-        <div class="ev-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>UZMA Berhad</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>29 April 2026</span>
-        </div>
-        <div class="ev-desc">A community service programme run under UZMA Berhad&rsquo;s <strong>Celebrating Women Empowerment</strong> initiative. The team went into the river alongside a local fishing association to net and remove <strong>ikan bandaraya</strong> — the invasive suckermouth catfish that burrows into riverbanks and crowds out native species — bagging the catch for disposal and helping restore the waterway.</div>
-        <div class="ev-chips"><span>Women Empowerment</span><span>Community Service</span><span>River Conservation</span><span>Team Volunteering</span></div>
-      </div>
-    </div>
-
-    <!-- ══ EVENT · Defence Services Asia (DSA) ══ -->
-    <div class="ev-card reveal">
-      <div class="ev-thumb" data-imgs="assets/img/profile/Kimi.jpeg"
-           data-caption="Defence Services Asia (DSA) — UZMA Geospatial AI booth, MITEC Kuala Lumpur">
-        <img src="assets/img/profile/Kimi.jpeg" alt="Manning the UZMA Geospatial AI booth at Defence Services Asia">
-        <span class="ev-tag">Exhibition</span>
-        <div class="ev-zoom"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div>
-      </div>
-      <div class="ev-body">
-        <div class="ev-title">Defence Services Asia (DSA)</div>
-        <div class="ev-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>MITEC, Kuala Lumpur</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>2026</span>
-        </div>
-        <div class="ev-desc">Manned the <strong>UZMA Geospatial AI booth</strong> at Defence Services Asia, briefing visitors on the systems we build — the <strong>UZMASAT-1</strong> satellite and its imagery, the WebGIS platforms and land-use analysis running live on the booth displays, and a <strong>VR</strong> experience that let guests explore the data first-hand. Spent the show explaining how each product works to industry and defence visitors.</div>
-        <div class="ev-chips"><span>Booth Duty</span><span>VR Demo</span><span>UZMASAT-1</span><span>Geospatial AI</span><span>Product Briefing</span></div>
-      </div>
-    </div>
+<!-- ═══════════ CERTIFICATES ═══════════ -->
+<div class="certs-section" style="padding-top:60px;">
+  <div class="cert-grid" id="certGrid">
 
     <!--
     ══════════════════════════════════════════════════════════════════════
-      TEMPLATE — copy this whole block to add a new event.
-      Replace: YOUR_PHOTO.jpg, the tag, title, location, year, description
-      and the chips. Put the photo file in this same folder.
+      TEMPLATE — copy this block for each certificate.
+      Put the image in assets/img/certs/ first.
+      The thumbnail keeps the ev-thumb class so it joins the lightbox.
     ══════════════════════════════════════════════════════════════════════
-    <div class="ev-card reveal">
-      <div class="ev-thumb" data-img="YOUR_PHOTO.jpg" data-caption="Short caption for the lightbox">
-        <img src="YOUR_PHOTO.jpg" alt="Describe the photo">
-        <span class="ev-tag">Exhibition</span>
-        <div class="ev-zoom"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div>
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb"
+           data-imgs="assets/img/certs/YOUR_CERT.jpg"
+           data-caption="Certificate name — issuing body">
+        <img src="assets/img/certs/YOUR_CERT.jpg" alt="Certificate name">
       </div>
-      <div class="ev-body">
-        <div class="ev-title">Event title goes here</div>
-        <div class="ev-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Location</span>
+      <div class="cert-body">
+        <div class="cert-title">Certificate name</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Issuing body</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Year</span>
         </div>
-        <div class="ev-desc">What the event was, what you did there, and what came out of it.</div>
-        <div class="ev-chips"><span>Tag one</span><span>Tag two</span></div>
+        <div class="cert-desc">One line on what it covered or why it was awarded.</div>
       </div>
     </div>
     -->
 
   </div>
+
+  <div class="cert-empty reveal" id="certEmpty">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-2.5L17 22l-1.5-7.5"/></svg>
+    <h3>Being added</h3>
+    <p>Certificates and awards will be listed here shortly.</p>
+  </div>
 </div>
+
 
 
 <!-- ═══════════ LIGHTBOX ═══════════ -->
@@ -391,6 +382,11 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 const ham = document.getElementById('ham'), mob = document.getElementById('mob');
 ham.addEventListener('click', () => mob.classList.toggle('open'));
 document.querySelectorAll('#mob a').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+
+/* hide the placeholder as soon as a real certificate card exists */
+if(document.querySelectorAll('#certGrid .cert-card').length){
+  const ce = document.getElementById('certEmpty'); if(ce) ce.style.display = 'none';
+}
 
 /* ══════════ LIGHTBOX ══════════ */
 /* every card can carry several photos (data-imgs, pipe-separated); they are
