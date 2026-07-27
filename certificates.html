@@ -130,6 +130,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 .cert-meta span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--light);}
 .cert-meta svg{width:13px;height:13px;flex-shrink:0;stroke:var(--blue);}
 .cert-desc{font-size:13.5px;color:var(--body);line-height:1.8;flex:1;}
+
+.cert-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(240,234,222,.9));}
+.cert-fallback span{width:62px;height:62px;border-radius:16px;background:var(--tone);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:22px;font-weight:700;letter-spacing:-.02em;
+  box-shadow:0 8px 20px rgba(45,55,72,.18);}
+.cert-fallback small{font-size:11.5px;font-weight:600;color:var(--light);text-align:center;padding:0 18px;line-height:1.5;}
+.cert-thumb.has-img .cert-fallback{display:none;}
+.cert-thumb img{position:relative;z-index:2;}
+.cert-thumb .ev-chips span,.cert-body .ev-chips span{font-size:11px;font-weight:500;color:var(--sage-d);
+  background:rgba(129,178,154,.22);padding:4px 12px;border-radius:50px;}
+.cert-body .ev-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px;padding-top:14px;border-top:1px solid var(--border);}
 .cert-empty{max-width:640px;margin:0 auto;text-align:center;background:var(--white);
   border:2px dashed var(--border);border-radius:18px;padding:44px 32px;}
 .cert-empty svg{width:40px;height:40px;stroke:var(--sage);margin-bottom:14px;}
@@ -240,28 +252,131 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <div class="certs-section" style="padding-top:60px;">
   <div class="cert-grid" id="certGrid">
 
-    <!--
-    ══════════════════════════════════════════════════════════════════════
-      TEMPLATE — copy this block for each certificate.
-      Put the image in assets/img/certs/ first.
-      The thumbnail keeps the ev-thumb class so it joins the lightbox.
-    ══════════════════════════════════════════════════════════════════════
     <div class="cert-card reveal">
-      <div class="ev-thumb cert-thumb"
-           data-imgs="assets/img/certs/YOUR_CERT.jpg"
-           data-caption="Certificate name — issuing body">
-        <img src="assets/img/certs/YOUR_CERT.jpg" alt="Certificate name">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_1_cisco_iot.jpg"
+           data-caption="Introduction to IoT — Cisco Networking Academy">
+        <div class="cert-fallback" style="--tone:#1ba0d7"><span>C</span><small>Cisco Networking Academy</small></div>
+        <img src="assets/img/certs/CERT_1_cisco_iot.jpg" alt="Introduction to IoT" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
       </div>
       <div class="cert-body">
-        <div class="cert-title">Certificate name</div>
+        <div class="cert-title">Introduction to IoT</div>
         <div class="cert-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Issuing body</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Year</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Cisco Networking Academy</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>December 2024</span>
         </div>
-        <div class="cert-desc">One line on what it covered or why it was awarded.</div>
+        <div class="cert-desc">Student-level credential covering IoT and digital transformation, the role of software and data in digital business, automation and AI, intent-based networking, and security in a digitised world.</div>
+        <div class="ev-chips"><span>Internet of Things</span><span>Digital Transformation</span><span>Intent-Based Networking</span></div>
       </div>
     </div>
-    -->
+
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_2_huawei_appgallery.jpg"
+           data-caption="UMPSA × Huawei AppGallery Mobile App Competition 2024 (Track A) — Huawei · MDEC · UMPSA">
+        <div class="cert-fallback" style="--tone:#c8102e"><span>H</span><small>Huawei</small></div>
+        <img src="assets/img/certs/CERT_2_huawei_appgallery.jpg" alt="UMPSA × Huawei AppGallery Mobile App Competition 2024 (Track A)" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">UMPSA × Huawei AppGallery Mobile App Competition 2024 (Track A)</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Huawei · MDEC · UMPSA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Aug – Nov 2024</span>
+        </div>
+        <div class="cert-desc">Participated with the innovative project <strong>Mental Well</strong>, a mobile application submitted to Track A of the competition run with MDEC and the Faculty of Computing.</div>
+        <div class="ev-chips"><span>Mobile App Development</span><span>XML</span><span>Android</span><span>Product Design</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_3_ai_aware.png"
+           data-caption="AI Aware Badge — Intel · MyDIGITAL — AI Untuk Rakyat">
+        <div class="cert-fallback" style="--tone:#0068b5"><span>AI</span><small>Intel</small></div>
+        <img src="assets/img/certs/CERT_3_ai_aware.png" alt="AI Aware Badge" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">AI Aware Badge</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Intel · MyDIGITAL — AI Untuk Rakyat</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>National programme</span>
+        </div>
+        <div class="cert-desc">First tier of the national AI Untuk Rakyat programme by MyDIGITAL and Intel, introducing artificial intelligence concepts and their impact on everyday life and work.</div>
+        <div class="ev-chips"><span>Artificial Intelligence</span><span>AI Literacy</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_4_ai_appreciate.png"
+           data-caption="AI Appreciate Badge — Intel · MyDIGITAL — AI Untuk Rakyat">
+        <div class="cert-fallback" style="--tone:#0068b5"><span>AI</span><small>Intel</small></div>
+        <img src="assets/img/certs/CERT_4_ai_appreciate.png" alt="AI Appreciate Badge" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">AI Appreciate Badge</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Intel · MyDIGITAL — AI Untuk Rakyat</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>National programme</span>
+        </div>
+        <div class="cert-desc">Second tier of AI Untuk Rakyat, going beyond awareness into how AI is applied, its benefits and limits, and the responsibilities that come with using it.</div>
+        <div class="ev-chips"><span>Artificial Intelligence</span><span>Applied AI</span><span>Responsible AI</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_5_montage_workshop.jpg"
+           data-caption="Montage Creation Workshop 2024 — PETAKOM · Faculty of Computing, UMPSA">
+        <div class="cert-fallback" style="--tone:#1e4d8c"><span>U</span><small>PETAKOM</small></div>
+        <img src="assets/img/certs/CERT_5_montage_workshop.jpg" alt="Montage Creation Workshop 2024" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">Montage Creation Workshop 2024</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>PETAKOM · Faculty of Computing, UMPSA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>25 May 2024</span>
+        </div>
+        <div class="cert-desc">Hands-on workshop on montage creation — sequencing footage, pacing and transitions to assemble a finished video piece.</div>
+        <div class="ev-chips"><span>Video Editing</span><span>Montage</span><span>Multimedia</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_6_wacana_hari_malaysia.jpg"
+           data-caption="Wacana Hari Malaysia: “Belia Perkasa, Malaysia Sejahtera” — Universiti Malaysia Pahang Al-Sultan Abdullah">
+        <div class="cert-fallback" style="--tone:#cf142b"><span>U</span><small>Universiti Malaysia Pahang Al-Sultan Abdullah</small></div>
+        <img src="assets/img/certs/CERT_6_wacana_hari_malaysia.jpg" alt="Wacana Hari Malaysia: “Belia Perkasa, Malaysia Sejahtera”" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">Wacana Hari Malaysia: “Belia Perkasa, Malaysia Sejahtera”</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Universiti Malaysia Pahang Al-Sultan Abdullah</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>17 September 2021</span>
+        </div>
+        <div class="cert-desc">Malaysia Day discourse programme on the role of youth in national development, organised by Residen Pelajar 3.</div>
+        <div class="ev-chips"><span>Leadership</span><span>Nation Building</span><span>Youth Programme</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_7_fitumpidus.jpg"
+           data-caption="FitUMPIDUS 2021 — Pusat Sukan dan Kebudayaan, UMPSA">
+        <div class="cert-fallback" style="--tone:#f5a623"><span>U</span><small>Pusat Sukan dan Kebudayaan, UMPSA</small></div>
+        <img src="assets/img/certs/CERT_7_fitumpidus.jpg" alt="FitUMPIDUS 2021" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">FitUMPIDUS 2021</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Pusat Sukan dan Kebudayaan, UMPSA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>20 September 2021</span>
+        </div>
+        <div class="cert-desc">International Day of University Sports, proclaimed by UNESCO and FISU — completed the 5 km run event.</div>
+        <div class="ev-chips"><span>5 km Run</span><span>University Sports</span><span>FISU</span></div>
+      </div>
+    </div>
 
   </div>
 
