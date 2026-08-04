@@ -145,7 +145,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 #lb-close{position:fixed;top:22px;right:24px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;padding:9px 20px;border-radius:50px;cursor:pointer;transition:all .22s;}
 #lb-close:hover{background:var(--blue);border-color:var(--blue);}
 .lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);color:#fff;font-size:20px;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .22s;}
-.lb-nav:hover{background:var(--blue);border-color:var(--blue);}
+.lb-nav:hover:not(:disabled){background:var(--blue);border-color:var(--blue);}
+.lb-nav:disabled{opacity:.24;cursor:not-allowed;}
 #lb-prev{left:22px;}#lb-next{right:22px;}
 
 .lb-tabs{display:none;gap:9px;margin-bottom:16px;}
@@ -1030,8 +1031,8 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <!-- ═══════════ LIGHTBOX ═══════════ -->
 <div id="lightbox">
   <button id="lb-close" onclick="closeLb()">Close &times;</button>
-  <button class="lb-nav" id="lb-prev" onclick="pageNav(-1)" title="Previous page of this project" aria-label="Previous page">&#8592;</button>
-  <button class="lb-nav" id="lb-next" onclick="pageNav(1)" title="Next page of this project" aria-label="Next page">&#8594;</button>
+  <button class="lb-nav" id="lb-prev" onclick="pageNav(-1)" title="Previous image in this project" aria-label="Previous image">&#8592;</button>
+  <button class="lb-nav" id="lb-next" onclick="pageNav(1)" title="Next image in this project" aria-label="Next image">&#8594;</button>
   <div class="lb-tabs" id="lb-tabs">
     <button class="lb-tab active" id="tab-video" onclick="switchTab('video')">▶ Video</button>
     <button class="lb-tab" id="tab-slides" onclick="switchTab('slides')">⊞ Slideshow</button>
@@ -1210,9 +1211,11 @@ const lbNextEv      = document.getElementById('lb-next-ev');
 function visibleItems(){
   return [...items].map((it, i) => i).filter(i => items[i].style.display !== 'none');
 }
+/* the arrows always mean "change image" — greyed out, never repurposed,
+   when this project only has the one page (or is a video) */
 function setPageArrows(on){
-  document.getElementById('lb-prev').style.display = on ? '' : 'none';
-  document.getElementById('lb-next').style.display = on ? '' : 'none';
+  document.getElementById('lb-prev').disabled = !on;
+  document.getElementById('lb-next').disabled = !on;
 }
 function projectCount(){
   const shown = visibleItems();
@@ -1337,7 +1340,7 @@ function renderLbImage(){
 
   const shown = visibleItems();
   document.getElementById('lb-counter').textContent =
-    (currentPages.length > 1 ? `Page ${currentPage + 1} of ${currentPages.length}  ·  ` : '') +
+    (currentPages.length > 1 ? `Image ${currentPage + 1} of ${currentPages.length}  ·  ` : '') +
     `Project ${shown.indexOf(currentItem) + 1} of ${shown.length}`;
 
   if(currentPages.length > 1){
@@ -1391,11 +1394,9 @@ document.getElementById('lightbox').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(!document.getElementById('lightbox').classList.contains('show')) return;
   if(e.key === 'Escape'){ closeLb(); return; }
-  /* a single-page project has nothing to step through, so the plain arrow
-     keys fall through to the project jump rather than doing nothing */
-  const solo = currentPages.length < 2;
-  if(e.key === 'ArrowLeft')  { (e.shiftKey || solo) ? lbNav(-1) : pageNav(-1); }
-  if(e.key === 'ArrowRight') { (e.shiftKey || solo) ? lbNav(1)  : pageNav(1);  }
+  /* left/right always means image, never project — same on every page */
+  if(e.key === 'ArrowLeft')  { e.shiftKey ? lbNav(-1) : pageNav(-1); }
+  if(e.key === 'ArrowRight') { e.shiftKey ? lbNav(1)  : pageNav(1);  }
   if(e.key === 'ArrowUp')   { e.preventDefault(); lbNav(-1); }
   if(e.key === 'ArrowDown') { e.preventDefault(); lbNav(1);  }
 });
