@@ -114,7 +114,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 /* ─── LIGHTBOX ─── */
 #lightbox{display:none;position:fixed;inset:0;background:rgba(35,41,54,.97);z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
 #lightbox.show{display:flex;}
-#lb-img{max-width:92vw;max-height:78vh;border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.55);}
+#lb-img{max-width:92vw;max-height:68vh;border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.55);}
 #lb-close{position:fixed;top:22px;right:24px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;padding:9px 20px;border-radius:50px;cursor:pointer;transition:all .22s;}
 #lb-close:hover{background:var(--blue);border-color:var(--blue);}
 .lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);color:#fff;font-size:20px;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .22s;}
@@ -122,6 +122,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 #lb-prev{left:22px;}#lb-next{right:22px;}
 #lb-caption{margin-top:16px;text-align:center;font-size:14px;font-weight:600;color:#fff;max-width:640px;}
 #lb-count{font-size:12px;color:rgba(255,255,255,.45);margin-top:5px;}
+/* event jump — deliberately a different shape to the round photo arrows */
+.lb-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:15px;flex-wrap:wrap;max-width:92vw;}
+.lb-jump{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);color:rgba(255,255,255,.8);font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;padding:9px 17px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:all .22s;max-width:290px;}
+.lb-jump:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+.lb-jump svg{width:13px;height:13px;flex:none;}
+.lb-jump b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lb-jump em{font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;opacity:.55;flex:none;}
 
 /* ─── FOOTER ─── */
 footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
@@ -158,6 +165,10 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
   .ev-grid{grid-template-columns:1fr;gap:24px;}
   .ft-grid{grid-template-columns:1fr;gap:28px;}
   #lb-prev{left:8px;}#lb-next{right:8px;}
+  #lb-img{max-height:58vh;}
+  .lb-bar{gap:8px;}
+  .lb-jump{max-width:44vw;padding:8px 13px;font-size:11.5px;gap:7px;}
+  .lb-jump b{display:none;}
   .top-btn{right:16px;bottom:16px;}
 }
 @media(prefers-reduced-motion:reduce){
@@ -373,11 +384,21 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <!-- ═══════════ LIGHTBOX ═══════════ -->
 <div id="lightbox">
   <button id="lb-close" onclick="closeLb()">Close &times;</button>
-  <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">&#8592;</button>
-  <button class="lb-nav" id="lb-next" onclick="lbNav(1)">&#8594;</button>
+  <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)" title="Previous photo in this event" aria-label="Previous photo">&#8592;</button>
+  <button class="lb-nav" id="lb-next" onclick="lbNav(1)" title="Next photo in this event" aria-label="Next photo">&#8594;</button>
   <img id="lb-img" src="" alt="">
   <div id="lb-caption"></div>
   <div id="lb-count"></div>
+  <div class="lb-bar" id="lb-bar">
+    <button class="lb-jump" id="lb-prev-ev" onclick="lbEvent(-1)" title="Go to the previous event">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <em>Prev event</em><b></b>
+    </button>
+    <button class="lb-jump" id="lb-next-ev" onclick="lbEvent(1)" title="Go to the next event">
+      <em>Next event</em><b></b>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
 </div>
 
 <!-- ═══════════ FOOTER ═══════════ -->
@@ -480,20 +501,30 @@ ham.addEventListener('click', () => mob.classList.toggle('open'));
 document.querySelectorAll('#mob a').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
 
 /* ══════════ LIGHTBOX ══════════ */
-/* every card can carry several photos (data-imgs, pipe-separated); they are
-   flattened into one list so the arrows walk the whole page of photos */
+/* every card can carry several photos (data-imgs, pipe-separated). the round
+   side arrows stay inside one event; the labelled buttons below jump between
+   events, so the two kinds of "next" never get confused for each other */
 const thumbs = [...document.querySelectorAll('.ev-thumb')];
 const photos = [];
 thumbs.forEach((t, ti) => {
   const caption = t.dataset.caption || '';
+  const card = t.closest('.ev-card');
+  const title = card ? (card.querySelector('.ev-title')||{}).textContent || '' : '';
   (t.dataset.imgs || t.dataset.img || '').split('|').filter(Boolean)
-    .forEach(src => photos.push({ src: src.trim(), caption, ti }));
+    .forEach(src => photos.push({ src: src.trim(), caption, title: title.trim(), ti }));
   t.dataset.first = String(photos.findIndex(p => p.ti === ti));
 });
+/* the events, in the order they appear on the page */
+const evOrder = [...new Set(photos.map(p => p.ti))];
 
 let cur = 0;
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
+const lbPrevEv = document.getElementById('lb-prev-ev');
+const lbNextEv = document.getElementById('lb-next-ev');
+
+/* photos of one event, and where we sit inside it */
+function shot(i){ const p = photos[i]; return photos.filter(x => x.ti === p.ti); }
 
 function openLb(i){
   cur = (i + photos.length) % photos.length;
@@ -501,29 +532,55 @@ function openLb(i){
   lbImg.src = p.src;
   lbImg.alt = p.caption;
   document.getElementById('lb-caption').textContent = p.caption;
-  const within = photos.filter(x => x.ti === p.ti);
+
+  const within = shot(cur);
   const pos = within.indexOf(p) + 1;
+  const ei = evOrder.indexOf(p.ti);
   document.getElementById('lb-count').textContent =
     (within.length > 1 ? `Photo ${pos} of ${within.length}  ·  ` : '') +
-    `${cur + 1} / ${photos.length}`;
+    `Event ${ei + 1} of ${evOrder.length}`;
+
+  /* one photo in this event means nothing to step through */
+  const solo = within.length < 2;
+  document.getElementById('lb-prev').style.display = solo ? 'none' : '';
+  document.getElementById('lb-next').style.display = solo ? 'none' : '';
+
+  const label = d => {
+    const t = evOrder[(ei + d + evOrder.length) % evOrder.length];
+    return (photos.find(x => x.ti === t) || {}).title || '';
+  };
+  lbPrevEv.querySelector('b').textContent = label(-1);
+  lbNextEv.querySelector('b').textContent = label(1);
+
   lb.classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 function closeLb(){ lb.classList.remove('show'); document.body.style.overflow = ''; }
-function lbNav(d){ openLb(cur + d); }
+
+/* next/prev photo — wraps inside the current event only */
+function lbNav(d){
+  const within = shot(cur);
+  const i = within.indexOf(photos[cur]);
+  openLb(photos.indexOf(within[(i + d + within.length) % within.length]));
+}
+/* next/prev event — lands on that event's first photo */
+function lbEvent(d){
+  const ei = evOrder.indexOf(photos[cur].ti);
+  const target = evOrder[(ei + d + evOrder.length) % evOrder.length];
+  openLb(photos.findIndex(x => x.ti === target));
+}
 
 thumbs.forEach(t => t.addEventListener('click', () => openLb(Number(t.dataset.first))));
 lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
 document.addEventListener('keydown', e => {
   if(!lb.classList.contains('show')) return;
   if(e.key === 'Escape') closeLb();
-  if(e.key === 'ArrowLeft') lbNav(-1);
-  if(e.key === 'ArrowRight') lbNav(1);
+  if(e.key === 'ArrowLeft')  { e.shiftKey ? lbEvent(-1) : lbNav(-1); }
+  if(e.key === 'ArrowRight') { e.shiftKey ? lbEvent(1)  : lbNav(1);  }
+  if(e.key === 'ArrowUp')   { e.preventDefault(); lbEvent(-1); }
+  if(e.key === 'ArrowDown') { e.preventDefault(); lbEvent(1);  }
 });
-if(photos.length < 2){
-  document.getElementById('lb-prev').style.display = 'none';
-  document.getElementById('lb-next').style.display = 'none';
-}
+if(evOrder.length < 2) document.getElementById('lb-bar').style.display = 'none';
 
 /* ══════════ BACK TO TOP ══════════ */
 const topBtn = document.getElementById('topBtn');
