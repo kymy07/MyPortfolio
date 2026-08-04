@@ -155,9 +155,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 .lb-tab.active{background:linear-gradient(95deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
 
 .lb-pages-nav{display:flex;align-items:center;gap:16px;margin-top:16px;}
-.lb-page-btn{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;padding:9px 20px;border-radius:50px;cursor:pointer;transition:all .22s;}
-.lb-page-btn:hover:not(:disabled){background:var(--blue);border-color:var(--blue);}
-.lb-page-btn:disabled{opacity:.22;cursor:not-allowed;}
 .lb-page-dots{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:50vw;}
 .lb-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.26);cursor:pointer;transition:all .22s;}
 .lb-dot.active{background:var(--blue);transform:scale(1.35);}
@@ -165,6 +162,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:74px;padding:0 9%;dis
 .lb-title{font-size:14px;font-weight:600;color:#fff;}
 .lb-counter{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;}
 #lb-page-links{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:14px;}
+/* project jump — deliberately a different shape to the round page arrows */
+.lb-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:15px;flex-wrap:wrap;max-width:92vw;}
+.lb-jump{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);color:rgba(255,255,255,.8);font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;padding:9px 17px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:all .22s;max-width:290px;}
+.lb-jump:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+.lb-jump svg{width:13px;height:13px;flex:none;}
+.lb-jump b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lb-jump em{font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;opacity:.55;flex:none;}
 .lb-ext-link{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(95deg,var(--blue),var(--purple));color:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;padding:9px 20px;border-radius:50px;transition:all .22s;}
 .lb-ext-link:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(224,122,95,.45);}
 
@@ -210,6 +214,9 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
   .showcase-main{padding-top:36px;}
   .ft-grid{grid-template-columns:1fr;gap:28px;}
   .lb-page-dots{max-width:60vw;}
+  .lb-bar{gap:8px;}
+  .lb-jump{max-width:44vw;padding:8px 13px;font-size:11.5px;gap:7px;}
+  .lb-jump b{display:none;}
   .top-btn{right:16px;bottom:16px;}
 }
 @media(prefers-reduced-motion:reduce){
@@ -1023,8 +1030,8 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
 <!-- ═══════════ LIGHTBOX ═══════════ -->
 <div id="lightbox">
   <button id="lb-close" onclick="closeLb()">Close &times;</button>
-  <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">&#8592;</button>
-  <button class="lb-nav" id="lb-next" onclick="lbNav(1)">&#8594;</button>
+  <button class="lb-nav" id="lb-prev" onclick="pageNav(-1)" title="Previous page of this project" aria-label="Previous page">&#8592;</button>
+  <button class="lb-nav" id="lb-next" onclick="pageNav(1)" title="Next page of this project" aria-label="Next page">&#8594;</button>
   <div class="lb-tabs" id="lb-tabs">
     <button class="lb-tab active" id="tab-video" onclick="switchTab('video')">▶ Video</button>
     <button class="lb-tab" id="tab-slides" onclick="switchTab('slides')">⊞ Slideshow</button>
@@ -1035,14 +1042,22 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
     <div class="lb-img-ph" id="lb-ph">No image available</div>
   </div>
   <div class="lb-pages-nav" id="lb-pages-nav" style="display:none;">
-    <button class="lb-page-btn" id="lb-page-prev" onclick="pageNav(-1)">&#8592; Prev</button>
     <div class="lb-page-dots" id="lb-dots"></div>
-    <button class="lb-page-btn" id="lb-page-next" onclick="pageNav(1)">Next &#8594;</button>
   </div>
   <div class="lb-info">
     <div class="lb-title" id="lb-title"></div>
     <div class="lb-counter" id="lb-counter"></div>
     <div id="lb-page-links"></div>
+  </div>
+  <div class="lb-bar" id="lb-bar">
+    <button class="lb-jump" id="lb-prev-ev" onclick="lbNav(-1)" title="Go to the previous project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <em>Prev project</em><b></b>
+    </button>
+    <button class="lb-jump" id="lb-next-ev" onclick="lbNav(1)" title="Go to the next project">
+      <em>Next project</em><b></b>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
   </div>
 </div>
 
@@ -1187,6 +1202,32 @@ const lbTabsEl      = document.getElementById('lb-tabs');
 const tabVideoBtn   = document.getElementById('tab-video');
 const tabSlidesBtn  = document.getElementById('tab-slides');
 const lbPageLinksEl = document.getElementById('lb-page-links');
+const lbPrevEv      = document.getElementById('lb-prev-ev');
+const lbNextEv      = document.getElementById('lb-next-ev');
+
+/* the round side arrows step pages inside one project; the labelled buttons
+   below move between projects, so the two kinds of "next" stay distinct */
+function visibleItems(){
+  return [...items].map((it, i) => i).filter(i => items[i].style.display !== 'none');
+}
+function setPageArrows(on){
+  document.getElementById('lb-prev').style.display = on ? '' : 'none';
+  document.getElementById('lb-next').style.display = on ? '' : 'none';
+}
+function projectCount(){
+  const shown = visibleItems();
+  return `Project ${shown.indexOf(currentItem) + 1} of ${shown.length}`;
+}
+function setJumpLabels(){
+  const shown = visibleItems();
+  const bar = document.getElementById('lb-bar');
+  if(shown.length < 2){ bar.style.display = 'none'; return; }
+  bar.style.display = '';
+  const k = shown.indexOf(currentItem);
+  const name = d => items[shown[(k + d + shown.length) % shown.length]].dataset.label || '';
+  lbPrevEv.querySelector('b').textContent = name(-1);
+  lbNextEv.querySelector('b').textContent = name(1);
+}
 
 const extIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 
@@ -1232,7 +1273,8 @@ function switchTab(mode){
   if(mode === 'video'){
     tabVideoBtn.classList.add('active'); tabSlidesBtn.classList.remove('active');
     document.getElementById('lb-pages-nav').style.display = 'none';
-    document.getElementById('lb-counter').textContent = '';
+    setPageArrows(false);           /* a video has no pages to step through */
+    document.getElementById('lb-counter').textContent = projectCount();
     lbImg.style.display = 'none'; lbPh.style.display = 'none'; lbVideo.style.display = 'block';
     lbVideo.src = item.dataset.video; lbVideo.load(); lbVideo.play().catch(() => {});
     renderPageLinks(item);
@@ -1265,7 +1307,8 @@ function openLb(itemIdx){
     lbImg.style.display = 'none'; lbPh.style.display = 'none'; lbVideo.style.display = 'block';
     lbVideo.src = videoSrc; lbVideo.load(); lbVideo.play().catch(() => {});
     document.getElementById('lb-pages-nav').style.display = 'none';
-    document.getElementById('lb-counter').textContent = '';
+    setPageArrows(false);
+    document.getElementById('lb-counter').textContent = projectCount();
     lbTabsEl.classList.remove('show');
     renderPageLinks(item);
   } else {
@@ -1275,6 +1318,7 @@ function openLb(itemIdx){
     renderLbImage();
   }
 
+  setJumpLabels();
   document.getElementById('lightbox').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
@@ -1291,8 +1335,10 @@ function renderLbImage(){
     lbImg.style.display = 'none'; lbPh.style.display = 'flex';
   }
 
+  const shown = visibleItems();
   document.getElementById('lb-counter').textContent =
-    currentPages.length > 1 ? (currentPage + 1) + ' / ' + currentPages.length : '';
+    (currentPages.length > 1 ? `Page ${currentPage + 1} of ${currentPages.length}  ·  ` : '') +
+    `Project ${shown.indexOf(currentItem) + 1} of ${shown.length}`;
 
   if(currentPages.length > 1){
     pagesNav.style.display = 'flex'; dots.innerHTML = '';
@@ -1302,16 +1348,17 @@ function renderLbImage(){
       d.onclick = () => { currentPage = i; renderLbImage(); };
       dots.appendChild(d);
     });
-    document.getElementById('lb-page-prev').disabled = currentPage === 0;
-    document.getElementById('lb-page-next').disabled = currentPage === currentPages.length - 1;
   } else {
     pagesNav.style.display = 'none';
   }
+  setPageArrows(currentPages.length > 1);
   renderPageLinks(item);
 }
 
+/* next/prev page — wraps inside the current project only */
 function pageNav(dir){
-  currentPage = Math.max(0, Math.min(currentPages.length - 1, currentPage + dir));
+  if(currentPages.length < 2) return;
+  currentPage = (currentPage + dir + currentPages.length) % currentPages.length;
   renderLbImage();
 }
 
@@ -1322,13 +1369,12 @@ function closeLb(){
   lbTabsEl.classList.remove('show');
 }
 
+/* next/prev project — skips whatever the active filter has hidden */
 function lbNav(dir){
-  let next = (currentItem + dir + items.length) % items.length;
-  let tries = 0;
-  while(items[next].style.display === 'none' && tries < items.length){
-    next = (next + dir + items.length) % items.length; tries++;
-  }
-  openLb(next);
+  const shown = visibleItems();
+  if(shown.length < 2) return;
+  const k = shown.indexOf(currentItem);
+  openLb(shown[(k + dir + shown.length) % shown.length]);
 }
 
 items.forEach((item, i) => {
@@ -1343,14 +1389,15 @@ document.getElementById('lightbox').addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
+  if(!document.getElementById('lightbox').classList.contains('show')) return;
   if(e.key === 'Escape'){ closeLb(); return; }
-  if(currentMode === 'slides'){
-    if(e.key === 'ArrowLeft'){ if(currentPages.length > 1 && currentPage > 0) pageNav(-1); else lbNav(-1); }
-    if(e.key === 'ArrowRight'){ if(currentPages.length > 1 && currentPage < currentPages.length - 1) pageNav(1); else lbNav(1); }
-  } else {
-    if(e.key === 'ArrowLeft') lbNav(-1);
-    if(e.key === 'ArrowRight') lbNav(1);
-  }
+  /* a single-page project has nothing to step through, so the plain arrow
+     keys fall through to the project jump rather than doing nothing */
+  const solo = currentPages.length < 2;
+  if(e.key === 'ArrowLeft')  { (e.shiftKey || solo) ? lbNav(-1) : pageNav(-1); }
+  if(e.key === 'ArrowRight') { (e.shiftKey || solo) ? lbNav(1)  : pageNav(1);  }
+  if(e.key === 'ArrowUp')   { e.preventDefault(); lbNav(-1); }
+  if(e.key === 'ArrowDown') { e.preventDefault(); lbNav(1);  }
 });
 
 /* ══════════ BACK TO TOP ══════════ */

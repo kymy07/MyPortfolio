@@ -575,8 +575,11 @@ lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
 document.addEventListener('keydown', e => {
   if(!lb.classList.contains('show')) return;
   if(e.key === 'Escape') closeLb();
-  if(e.key === 'ArrowLeft')  { e.shiftKey ? lbEvent(-1) : lbNav(-1); }
-  if(e.key === 'ArrowRight') { e.shiftKey ? lbEvent(1)  : lbNav(1);  }
+  /* a single-photo event has nothing to step through, so the plain arrow
+     keys fall through to the event jump rather than doing nothing */
+  const solo = shot(cur).length < 2;
+  if(e.key === 'ArrowLeft')  { (e.shiftKey || solo) ? lbEvent(-1) : lbNav(-1); }
+  if(e.key === 'ArrowRight') { (e.shiftKey || solo) ? lbEvent(1)  : lbNav(1);  }
   if(e.key === 'ArrowUp')   { e.preventDefault(); lbEvent(-1); }
   if(e.key === 'ArrowDown') { e.preventDefault(); lbEvent(1);  }
 });
