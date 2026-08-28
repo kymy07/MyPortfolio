@@ -284,12 +284,67 @@ footer{background:var(--dark);color:#fff;padding:64px 9% 26px;}
     <button class="filter-btn active" data-filter="all">All <i></i></button>
     <button class="filter-btn" data-filter="certification">Certification <i></i></button>
     <button class="filter-btn" data-filter="participation">Participation <i></i></button>
+    <button class="filter-btn" data-filter="recognition">Recognition <i></i></button>
   </div>
 </div>
 
 <!-- ═══════════ CERTIFICATES ═══════════ -->
 <div class="certs-section" style="padding-top:44px;">
   <div class="cert-grid" id="certGrid">
+
+    <div class="cert-card reveal" data-cat="recognition">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_20_uzma_appreciation.jpg"
+           data-caption="Certificate of Appreciation — UZMA Group, Digital Earth Trainee">
+        <div class="cert-fallback" style="--tone:#e0442a"><span>U</span><small>UZMA Group</small></div>
+        <img src="assets/img/certs/CERT_20_uzma_appreciation.jpg" alt="Certificate of Appreciation — UZMA Group" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">Certificate of Appreciation — Digital Earth Trainee</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>UZMA Group · Geospatial AI</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>9 March &ndash; 21 August 2026</span>
+        </div>
+        <div class="cert-desc">Awarded by UZMA Group for the internship served as a Digital Earth Trainee with Geospatial AI Sdn Bhd &mdash; recognising the standard set for job performance and the commitment to every allocated duty across the organisation. Signed by Mohd Saiful Jamaludin, General Manager of the People Division. NRIC redacted on the copy shown.</div>
+        <div class="ev-chips"><span>Internship</span><span>Digital Earth</span><span>Remote Sensing</span><span>Industry Recognition</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal" data-cat="certification">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_21_aws_ai_apps_isbt.jpg|assets/img/certs/CERT_22_aws_ai_apps_reccsar.jpg"
+           data-caption="Building AI-Powered Applications using AWS — ISBT &amp; Reccsar Private Limited">
+        <div class="cert-fallback" style="--tone:#1f5fbf"><span>R</span><small>Reccsar &amp; ISBT</small></div>
+        <img src="assets/img/certs/CERT_21_aws_ai_apps_isbt.jpg" alt="Building AI-Powered Applications using AWS" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">Building AI-Powered Applications using AWS</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Reccsar Private Limited · ISBT</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>15 &ndash; 16 August 2026</span>
+        </div>
+        <div class="cert-desc">Two-day online professional enhancement program on designing and shipping AI-powered applications on Amazon Web Services. Both the certificate of completion, signed by director Hariharan Ramachandran, and the certificate of participation are shown. Cert ID REC-20260011260.</div>
+        <div class="ev-chips"><span>Amazon Web Services</span><span>Applied AI</span><span>Cloud</span><span>2 Days</span></div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal" data-cat="certification">
+      <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_23_ai_uiux_prototyping.jpg"
+           data-caption="AI-Assisted UI/UX Design and Prototyping — ISBT &amp; Reccsar Private Limited">
+        <div class="cert-fallback" style="--tone:#1f5fbf"><span>R</span><small>Reccsar &amp; ISBT</small></div>
+        <img src="assets/img/certs/CERT_23_ai_uiux_prototyping.jpg" alt="AI-Assisted UI/UX Design and Prototyping" loading="lazy"
+             onload="this.closest('.cert-thumb').classList.add('has-img')" onerror="this.remove()">
+      </div>
+      <div class="cert-body">
+        <div class="cert-title">AI-Assisted UI/UX Design and Prototyping</div>
+        <div class="cert-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Reccsar Private Limited · ISBT</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>2 August 2026</span>
+        </div>
+        <div class="cert-desc">Online session on running the UI/UX loop with AI in the seat next to you &mdash; generating layout and interface concepts, then turning them into clickable prototypes and iterating on the result. Signed by director Hariharan Ramachandran.</div>
+        <div class="ev-chips"><span>UI/UX Design</span><span>Prototyping</span><span>Generative AI</span></div>
+      </div>
+    </div>
 
     <div class="cert-card reveal" data-cat="certification">
       <div class="ev-thumb cert-thumb" data-imgs="assets/img/certs/CERT_13_google_ai_professional.jpg"
